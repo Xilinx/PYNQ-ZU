@@ -1,0 +1,14 @@
+# Copyright (C) 2021 Xilinx, Inc
+# SPDX-License-Identifier: BSD-3-Clause
+
+[Unit]
+Description = USB3.0 VBus Detection
+Before = usbgadget.service
+
+[Service]
+Type = oneshot
+RemainAfterExit=yes
+ExecStart = /usr/local/bin/vbus-det
+
+[Install]
+WantedBy = basic.target

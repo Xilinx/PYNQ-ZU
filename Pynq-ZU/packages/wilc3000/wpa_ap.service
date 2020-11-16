@@ -1,0 +1,14 @@
+# Copyright (C) 2021 Xilinx, Inc
+# SPDX-License-Identifier: BSD-3-Clause
+
+[Unit]
+Description=Wifi Access Point for Pynq-ZU
+Before=network-online.service isc-dhcp-server.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/local/share/wpa_ap/ap.sh
+
+[Install]
+WantedBy=basic.target

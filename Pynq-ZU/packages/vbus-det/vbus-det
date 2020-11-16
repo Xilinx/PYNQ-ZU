@@ -1,0 +1,10 @@
+#!/bin/bash
+# Create a pulse on MIO7 to properly reset USB3.0
+# Require vbus_det set as gpio leds in dts
+
+# Copyright (C) 2021 Xilinx, Inc
+# SPDX-License-Identifier: BSD-3-Clause
+
+echo 0 >/sys/class/leds/vbus_det/brightness
+echo 1 >/sys/class/leds/vbus_det/brightness
+

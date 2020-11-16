@@ -1,0 +1,12 @@
+# Copyright (C) 2021 Xilinx, Inc
+# SPDX-License-Identifier: BSD-3-Clause
+
+allow-hotplug eth0
+iface eth0 inet dhcp
+    post-up ifup eth0:1
+    pre-down ifdown eth0:1
+
+allow-hotplug eth0:1
+iface eth0:1 inet static
+    address 192.168.2.99
+    netmask 255.255.255.0

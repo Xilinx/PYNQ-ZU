@@ -1,0 +1,3 @@
+[submodule "Pynq-ZU/packages/pcam5c/embeddedsw"]
+	path = Pynq-ZU/packages/pcam5c/embeddedsw
+	url = https://github.com/Xilinx/embeddedsw.git
