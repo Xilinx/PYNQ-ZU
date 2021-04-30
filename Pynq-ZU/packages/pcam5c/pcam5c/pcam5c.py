@@ -1,4 +1,4 @@
-#   Copyright (c) 2020, Xilinx, Inc.
+#   Copyright (c) 2020-2021, Xilinx, Inc.
 #   All rights reserved.
 # 
 #   Redistribution and use in source and binary forms, with or without
@@ -32,9 +32,10 @@ import os
 import cffi
 import warnings
 from pynq import DefaultHierarchy
+import contextlib
 
-__author__ = "Parimal Patel, Yun Rock Qu"
-__copyright__ = "Copyright 2020, Xilinx"
+__author__ = "Parimal Patel, Yun Rock Qu, Mario Ruiz"
+__copyright__ = "Copyright 2020-2021, Xilinx"
 __email__ = "pynq_support@xilinx.com"
 
 
@@ -71,10 +72,11 @@ class Pcam5C(DefaultHierarchy):
         return (
             'gpio_ip_reset' in description['ip'] and
             'cam_gpio' in description['ip'] and
-            'mipi_csi2_rx_subsyst_0' in description['ip'] and
-            'demosaic0' in description['ip'] and
-            'gamma_lut0' in description['ip'] and
-            'v_proc_ss_0' in description['ip'])
+            'mipi_csi2_rx_subsyst' in description['ip'] and
+            'demosaic' in description['ip'] and
+            'gamma_lut' in description['ip'] and
+            'v_proc_sys' in description['ip'] and
+            'pixel_pack' in description['ip'])
 
     def __init__(self, description):
         """Create a new instance of the driver
@@ -90,24 +92,126 @@ class Pcam5C(DefaultHierarchy):
         if _pcam5c_lib is None:
             raise RuntimeError("No PCam5C Library")
         super().__init__(description)
+        self._vdma = self.axi_vdma
+        self._initialize()
 
-    def initialize(self):
+    def _initialize(self):
+        """ Initialize PCAM5C
+        """
+
         self._virtaddr_gpio_ip_reset=self.gpio_ip_reset.mmio.array.ctypes.data
         self._virtaddr_cam_gpio=self.cam_gpio.mmio.array.ctypes.data
-        self._virtaddr_v_proc_ss_0=self.v_proc_ss_0.mmio.array.ctypes.data
-        self._virtaddr_gamma_lut0=self.gamma_lut0.mmio.array.ctypes.data
-        self._virtaddr_demosaic0=self.demosaic0.mmio.array.ctypes.data
-        self._virtaddr_mipi_csi2_rx_subsyst_0=self.mipi_csi2_rx_subsyst_0.mmio.array.ctypes.data
+        self._virtaddr_v_proc_sys=self.v_proc_sys.mmio.array.ctypes.data
+        self._virtaddr_gamma_lut=self.gamma_lut.mmio.array.ctypes.data
+        self._virtaddr_demosaic=self.demosaic.mmio.array.ctypes.data
+        self._virtaddr_mipi_csi2_rx_subsyst=\
+            self.mipi_csi2_rx_subsyst.mmio.array.ctypes.data
         self.handle=_pcam5c_lib.pcam_mipi(self._virtaddr_gpio_ip_reset,
                                           self._virtaddr_cam_gpio,
-                                          self._virtaddr_v_proc_ss_0,
-                                          self._virtaddr_gamma_lut0,
-                                          self._virtaddr_demosaic0,
-                                          self._virtaddr_mipi_csi2_rx_subsyst_0
+                                          self._virtaddr_v_proc_sys,
+                                          self._virtaddr_gamma_lut,
+                                          self._virtaddr_demosaic,
+                                          self._virtaddr_mipi_csi2_rx_subsyst
                                           )
-        return(self.handle)
 
-    def start(self, handle):
-        print('Handle:', handle)
+    def configure(self, videomode):
+        """Configure the pipeline to use the specified VideoMode format.
+
+        If the pipeline is running it is stopped prior to the configuration
+        being changed
+
+        Parameters
+        ----------
+        videomode : VideoMode
+            The VideoMode format to configure the pipeline for
+        """
+        if self._vdma.readchannel.running:
+            self._vdma.readchannel.stop()
+        self.pixel_pack.bits_per_pixel = videomode.bits_per_pixel
+        self._vdma.readchannel.mode = videomode
+        return self._closecontextmanager()
+
+    def start(self):
+        """Start the pipeline
+
+        """
         _pcam5c_lib.StartPcam(self.handle)
-        print("Camera started")
+        self._vdma.readchannel.start()
+        return self._stopcontextmanager()
+
+    def stop(self):
+        """Stop the pipeline
+
+        """
+        self._vdma.readchannel.stop()
+
+    @contextlib.contextmanager
+    def _stopcontextmanager(self):
+        """Context Manager to stop the VDMA at the end of the block
+
+        """
+        yield
+        self.stop()
+
+    @contextlib.contextmanager
+    def _closecontextmanager(self):
+        """Context Manager to close the HDMI port at the end of the block
+
+        """
+        yield
+        self.close()
+
+    def close(self):
+        """Uninitialise the drivers, stopping the pipeline beforehand
+
+        """
+        self.stop()
+
+    @property
+    def mode(self):
+        """Video mode of the input
+
+        """
+        return self._vdma.readchannel.mode
+
+    @property
+    def cacheable_frames(self):
+        """Whether frames should be cacheable or non-cacheable
+
+        Only valid if a VDMA has been specified
+        """
+        if self._vdma:
+            return self._vdma.readchannel.cacheable_frames
+        else:
+            raise RuntimeError("No VDMA specified")
+
+    @cacheable_frames.setter
+    def cacheable_frames(self, value):
+        if self._vdma:
+            self._vdma.readchannel.cacheable_frames = value
+        else:
+            raise RuntimeError("No VDMA specified")
+
+    def readframe(self):
+        """Read a video frame
+
+        See AxiVDMA.S2MMChannel.readframe for details
+        """
+        return self._vdma.readchannel.readframe()
+
+    async def readframe_async(self):
+        """Read a video frame
+
+        See AxiVDMA.S2MMChannel.readframe for details
+        """
+        return await self._vdma.readchannel.readframe_async()
+
+    def tie(self, output):
+        """Mirror the video input on to an output channel
+
+        Parameters
+        ----------
+        output : HDMIOut
+            The output to mirror on to
+        """
+        self._vdma.readchannel.tie(output._vdma.writechannel)
