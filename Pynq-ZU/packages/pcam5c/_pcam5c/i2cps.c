@@ -64,7 +64,7 @@ int setI2C(unsigned int index, long slave_addr){
     if((i2c_fd = open(buf, O_RDWR)) < 0)
         return -1;
     if (ioctl(i2c_fd, I2C_SLAVE, slave_addr) < 0)
-        return -1;
+        return -2;
     return i2c_fd;
 }
 
@@ -75,7 +75,8 @@ int unsetI2C(int i2c_fd){
 
 int writeI2C_asFile(int i2c_fd, unsigned char writebuffer[], 
                     unsigned char bytes){
-    unsigned char bytesWritten = write(i2c_fd, writebuffer, bytes);
+    int bytesWritten = 0;
+    bytesWritten = write(i2c_fd, writebuffer, bytes);
     if(bytes != bytesWritten)
         return -1;
     return 0;

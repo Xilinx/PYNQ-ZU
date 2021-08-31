@@ -210,11 +210,15 @@ int pcam_mipi(unsigned long GPIO_IP_RESET_BaseAddress, unsigned long CAMGPIO_Bas
 	Status = InitializeCsiRxSs();
 	if (Status != XST_SUCCESS) {
 		xil_printf("CSI Rx Ss Init failed status = %x.\r\n", Status);
-		return XST_FAILURE;
+		return -1;
 	}
 
 	Status=init_pcam(i2c_fd,CAMGPIO_BaseAddress, MIPI_CSI2_Baseaddress, \
 			XVIDC_VM_1280x720_60_P);
+	if (Status != XST_SUCCESS) {
+		xil_printf("init_pcam failed.\r\n");
+		return -1;
+	}
 	xil_printf("PCam init done.\r\n");
 
 	InitImageProcessingPipe(VPROCSSCS_BaseAddress, GAMMALUT_BaseAddress, DEMOSAIC_BaseAddress);

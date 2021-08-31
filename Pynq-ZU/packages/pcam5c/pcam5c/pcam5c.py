@@ -93,26 +93,23 @@ class Pcam5C(DefaultHierarchy):
             raise RuntimeError("No PCam5C Library")
         super().__init__(description)
         self._vdma = self.axi_vdma
-        self._initialize()
 
-    def _initialize(self):
-        """ Initialize PCAM5C
-        """
-
-        self._virtaddr_gpio_ip_reset=self.gpio_ip_reset.mmio.array.ctypes.data
-        self._virtaddr_cam_gpio=self.cam_gpio.mmio.array.ctypes.data
-        self._virtaddr_v_proc_sys=self.v_proc_sys.mmio.array.ctypes.data
-        self._virtaddr_gamma_lut=self.gamma_lut.mmio.array.ctypes.data
-        self._virtaddr_demosaic=self.demosaic.mmio.array.ctypes.data
-        self._virtaddr_mipi_csi2_rx_subsyst=\
+        virtaddr_gpio_ip_reset = self.gpio_ip_reset.mmio.array.ctypes.data
+        virtaddr_cam_gpio = self.cam_gpio.mmio.array.ctypes.data
+        virtaddr_v_proc_sys = self.v_proc_sys.mmio.array.ctypes.data
+        virtaddr_gamma_lut = self.gamma_lut.mmio.array.ctypes.data
+        virtaddr_demosaic = self.demosaic.mmio.array.ctypes.data
+        virtaddr_mipi_csi2_rx_subsyst = \
             self.mipi_csi2_rx_subsyst.mmio.array.ctypes.data
-        self.handle=_pcam5c_lib.pcam_mipi(self._virtaddr_gpio_ip_reset,
-                                          self._virtaddr_cam_gpio,
-                                          self._virtaddr_v_proc_sys,
-                                          self._virtaddr_gamma_lut,
-                                          self._virtaddr_demosaic,
-                                          self._virtaddr_mipi_csi2_rx_subsyst
+        self.handle=_pcam5c_lib.pcam_mipi(virtaddr_gpio_ip_reset,
+                                          virtaddr_cam_gpio,
+                                          virtaddr_v_proc_sys,
+                                          virtaddr_gamma_lut,
+                                          virtaddr_demosaic,
+                                          virtaddr_mipi_csi2_rx_subsyst
                                           )
+        if self.handle < 0:
+            raise RuntimeError("PCam5C cannot be initialized")
 
     def configure(self, videomode):
         """Configure the pipeline to use the specified VideoMode format.
