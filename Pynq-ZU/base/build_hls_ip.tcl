@@ -18,8 +18,8 @@ foreach src [glob -directory ${ip_name} *.cpp] {
     add_files ${src}
 }
 open_solution ${ip_name}_zu_solution
-set_part {xczu7ev-ffvc1156-2-i} -tool vivado
-create_clock -period 3.3 -name default
+set_part {xczu7ev-ffvc1156-2-i}
+create_clock -period 3.3
 csynth_design
 export_design -format ip_catalog -description [concat "PYNQ ZU " ${ip_name}] -version $version -display_name [concat "PYNQ ZU " ${ip_name}] 
 cd ../../..

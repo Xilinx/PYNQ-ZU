@@ -12,8 +12,8 @@ foreach item $ip version $ip_version {
    if {[catch { glob -directory ./ip/hls/${item}/${item}_zu_solution/impl/ip/ *.zip} zip_file]} {
 # Build IP only if a packaged IP does not exist
       puts "Building $item IP"
-      puts "vivado_hls -f ./build_hls_ip.tcl -tclargs ${item} ${version}"
-      exec vivado_hls -f ./build_hls_ip.tcl -tclargs ${item} ${version}
+      puts "vitis_hls -f ./build_hls_ip.tcl -tclargs ${item} ${version}"
+      exec vitis_hls -f ./build_hls_ip.tcl -tclargs ${item} ${version}
    } else {
 # Skip IP when a packaged IP exists in ip directory
       puts "Skipping building $item"
@@ -37,7 +37,7 @@ foreach item $ip version $ip_version {
         lassign $period target estimated uncertainty
         if {$target < $estimated} {
             puts "ERROR: Estimated clock period $estimated > target $target."
-            puts "ERROR: Revise $item to be compatible with Vivado_HLS."
+            puts "ERROR: Revise $item to be compatible with Vitis HLS."
             exit 1
         }
       }
@@ -54,7 +54,7 @@ foreach item $ip version $ip_version {
         lassign $interval lc_min lc_max la_min la_max achieved target
         if {$achieved != $target} {
             puts "ERROR: Achieved II $achieved != target $target."
-            puts "ERROR: Revise $item to be compatible with Vivado_HLS."
+            puts "ERROR: Revise $item to be compatible with Vitis HLS."
             exit 1
         }
       }
