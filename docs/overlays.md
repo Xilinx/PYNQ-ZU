@@ -94,7 +94,7 @@ The Python API for the peripherals in the base overlay is covered in
 
 ## Rebuild the base overlay
 
-The following steps describe how to rebuild the *base* overlay. You need to use *Vivado 2020.1* to run these steps. It will not work with other versions of Vivado. As the precompiled design is already available in the PYNQ image for the board, you only need to do this if you want to study the design, or make a modification. 
+The following steps describe how to rebuild the *base* overlay. You need to use *Vivado 2020.2* to run these steps. It will not work with other versions of Vivado. As the precompiled design is already available in the PYNQ image for the board, you only need to do this if you want to study the design, or make a modification.
 
 ### Get the source code
 
