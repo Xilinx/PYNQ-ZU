@@ -1,5 +1,0 @@
-recursive-include _pcam5c *
-recursive-include common *
-recursive-include embeddedsw *
-recursive-include pcam5c *
-include embeddedsw_lib.mk
