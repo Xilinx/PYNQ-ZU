@@ -2,6 +2,5 @@
 *.jou
 __pycache__/
 .ipynb_checkpoints/
-libpcam5c.so
 base/
 ip/
