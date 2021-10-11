@@ -85,7 +85,7 @@ class BaseOverlay(pynq.Overlay):
                 PYNQZU_PMODB_SPECIFICATION)
                 
         pynq.lib.pynqmicroblaze.bsp.add_module_path(
-            '/home/xilinx/pynq/lib/pynqmicroblaze/grove_modules')
+            '/pynq/lib/pynqmicroblaze/grove_modules')
 
     def download(self):
         super().download()
