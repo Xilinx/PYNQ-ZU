@@ -474,7 +474,9 @@ td {
 }
 
 .wrapper {
-    width: 1200px
+    width: 1200px;
+    display: inline-block;
+    height: fit-content;
 }
 
 a.buttons {
