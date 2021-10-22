@@ -1,5 +1,5 @@
 ---
-layout: home
+layout: default
 ---
 
 # PYNQ-ZU development board
