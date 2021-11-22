@@ -5,7 +5,7 @@
 
 target=$1
 script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-kernel=5.4.0-xilinx-v2020.1
+kernel=5.4.0-xilinx-v2020.2
 
 sudo cp $script_dir/wpa_ap.service $target/lib/systemd/system
 sudo cp -r $script_dir/wpa_ap $target/usr/local/share/

@@ -94,6 +94,17 @@ set_property IOSTANDARD LVCMOS33 [get_ports HDMI_CTL_iic_scl_io];
 # HDMI_CTL_iic_sda_io
 set_property PACKAGE_PIN B15 [get_ports HDMI_CTL_iic_sda_io];
 set_property IOSTANDARD LVCMOS33 [get_ports HDMI_CTL_iic_sda_io];
+
+## Header XADC Pin1 to an_p0, Pin2 to an_p1, an_n0 and an_n1 are grounded
+set_property PACKAGE_PIN AC7 [get_ports {Vaux14_v_n}]; #Channel 14n
+set_property PACKAGE_PIN AB7 [get_ports {Vaux14_v_p}]; #Channel 14p
+set_property PACKAGE_PIN AC8 [get_ports {Vaux15_v_n}]; #Channel 15n
+set_property PACKAGE_PIN AB8 [get_ports {Vaux15_v_p}]; #Channel 15p
+set_property IOSTANDARD ANALOG [get_ports {Vaux14_v_n}];
+set_property IOSTANDARD ANALOG [get_ports {Vaux14_v_p}];
+set_property IOSTANDARD ANALOG [get_ports {Vaux15_v_n}];
+set_property IOSTANDARD ANALOG [get_ports {Vaux15_v_p}];
+
 # dip_switch_4bits_tri_i
 set_property PACKAGE_PIN AA12 [get_ports {dip_switch_4bits_tri_i[0]}];
 set_property PACKAGE_PIN Y12 [get_ports {dip_switch_4bits_tri_i[1]}];
@@ -189,15 +200,6 @@ set_property PACKAGE_PIN G4  [get_ports {rpi[27]}];
 
 set_property IOSTANDARD LVCMOS12 [get_ports {rpi[*]}]; 
 set_property DRIVE 8 [get_ports {rpi[*]}];    
-## Header XADC Pin1 to an_p0, Pin2 to an_p1, an_n0 and an_n1 are grounded
-set_property PACKAGE_PIN AC7 [get_ports {Vaux14_v_n}]; #Channel 14n		   
-set_property PACKAGE_PIN AB7 [get_ports {Vaux14_v_p}]; #Channel 14p             
-set_property PACKAGE_PIN AC8 [get_ports {Vaux15_v_n}]; #Channel 15n            
-set_property PACKAGE_PIN AB8 [get_ports {Vaux15_v_p}]; #Channel 15p 
-set_property IOSTANDARD ANALOG [get_ports {Vaux14_v_n}];            
-set_property IOSTANDARD ANALOG [get_ports {Vaux14_v_p}];            
-set_property IOSTANDARD ANALOG [get_ports {Vaux15_v_n}];            
-set_property IOSTANDARD ANALOG [get_ports {Vaux15_v_p}];            
 
 # grove0_tri_io
 set_property PACKAGE_PIN K5  [get_ports {pl_groves[0]}];  # J19, Pin1

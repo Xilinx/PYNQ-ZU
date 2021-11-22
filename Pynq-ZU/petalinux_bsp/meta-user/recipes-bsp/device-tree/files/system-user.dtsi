@@ -144,7 +144,7 @@
 			#address-cells = <0x1>;
 			#size-cells = <0x0>;
 			reg = <0x3>;
-			label = "CAM";
+			label = "RPICAM";
 		};
 
 		i2c@4 {

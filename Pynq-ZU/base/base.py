@@ -84,7 +84,8 @@ class BaseOverlay(pynq.Overlay):
                 self.trace_analyzer_pmod1.description['ip'],
                 PYNQZU_PMODB_SPECIFICATION)
                 
-        pynq.lib.pynqmicroblaze.bsp.add_module_path('/home/xilinx/pynq/lib/pynqmicroblaze/grove_modules')
+        pynq.lib.pynqmicroblaze.bsp.add_module_path(
+            '/pynq/lib/pynqmicroblaze/grove_modules')
 
     def download(self):
         super().download()
@@ -95,7 +96,7 @@ class BaseOverlay(pynq.Overlay):
         # Wait for AXI reset to de-assert
         time.sleep(0.2)
         # Deassert HDMI clock reset
-        self.reset_control.channel1[0].write(1)
+        self.hdmi_tx_control.channel2[0].write(1)
         # Wait 200 ms for the clock to come out of reset
         time.sleep(0.2)
 
@@ -107,8 +108,8 @@ class BaseOverlay(pynq.Overlay):
         dp159 = DP159(self.HDMI_CTL_axi_iic, 0x5C)
         si = SI_5324C(self.HDMI_CTL_axi_iic, 0x68)
         self.video.hdmi_out.frontend.clocks = [dp159, si]
-        if((self.tx_en_out.read(0)) == 0):
-            self.tx_en_out.write(0, 1)
+        if((self.hdmi_tx_control.read(0)) == 0):
+            self.hdmi_tx_control.write(0, 1)
 
     def _check_syzygy_vio(self):
         syzygy_vio = pynq.pmbus.get_rails()["SYZYGY_VIO"]
