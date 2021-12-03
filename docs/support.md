@@ -24,7 +24,7 @@ Questions related to Xilinx tools and building designs for your board, including
 
 ## Hardware problems
 
-Follow the troubleshooting guide below, and post questions on the [PYNQ support forum](https://discuss.pynq.io/). If you have a problem with you board and you suspect the board is damaged, please contact the manufacturer [TUL](https://www.tul.com.tw/).
+Follow the troubleshooting guide below, and post questions on the [PYNQ support forum](https://discuss.pynq.io/). If you have a problem with you board and you suspect the board is damaged, please contact the manufacturer [TUL](https://www.tulembedded.com/).
 
 
 

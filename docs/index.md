@@ -22,7 +22,7 @@ For more details see the [board overview](overview.md) page.
 
 ## Getting started
 
-If you already have a board, go to the [PYNQ-ZU getting started](./getting_started.md) guide. The getting started guide includes instructions and a video showing you how to setup your board to run PYNQ. See the [TUL PYNQ-ZU page](https://www.tul.com.tw/ProductsPYNQ-ZU.html) for details on how to purchase a PYNQ-ZU.
+If you already have a board, go to the [PYNQ-ZU getting started](./getting_started.md) guide. The getting started guide includes instructions and a video showing you how to setup your board to run PYNQ. See the [TUL PYNQ-ZU page](https://www.tulembedded.com/FPGA/ProductsPYNQ-ZU.html) for details on how to purchase a PYNQ-ZU.
 
 ## PYNQ-ZU overlays
 
