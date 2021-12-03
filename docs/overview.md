@@ -31,7 +31,19 @@ The board has the following features and interface:
 
 ### Zynq UltraScale+ MPSoC device
 
-The PYNQ-ZU has a Zynq Ultrascale+ XCZU5EG-SFVC784 with an ARM Cortex A53 Processing System (PS) and Xilinx Ultrascale+ Programmable Logic (PL). Peripherals are connected to PS and PL as follows:
+The PYNQ-ZU has a Zynq Ultrascale+ XCZU5EG-SFVC784 with an ARM Cortex A53 Processing System (PS) and Xilinx Ultrascale+ Programmable Logic (PL).
+
+This device has the following resources:
+
+| System Logic Cells (K) | 256 |
+|-|-|
+| __CLB Flip-Flops (K)__ | __234__ |
+| __CLB LUTs (K)__ | __117__ |
+| __Total Block RAM (Mb)__ | __5.1__ |
+| __Total Ultra RAM (Mb)__ | __18__ |
+| __DSP Slices__ | __1,248__ |
+
+Peripherals are connected to PS and PL as follows:
 
 ### PS connected
 
@@ -58,8 +70,3 @@ The PYNQ-ZU has a Zynq Ultrascale+ XCZU5EG-SFVC784 with an ARM Cortex A53 Proces
 * CSI
 * XADC
 * 4x Switches, 4x User pushbuttons, 4x LEDs, 2x RGB LEDs   
-
-
-
-
-
