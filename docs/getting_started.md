@@ -27,7 +27,7 @@ You can watch the getting started video guide, or follow the instructions below.
 
 ### Prepare a Micro SD card
 
-* Download the [PYNQ-ZU v2.6 PYNQ image]() and write the image to a Micro SD card
+* Download the [PYNQ-ZU v2.7 PYNQ image]() and write the image to a Micro SD card
 
 ### Setup the board
 
