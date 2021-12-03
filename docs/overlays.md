@@ -78,7 +78,7 @@ The PYNQ-ZU board includes two tri-color LEDs, 4 switches, 4 user push buttons c
 
 ### IOPs
 
-For more information see the [PYNQ IOP documentation](https://pynq.readthedocs.io/en/latest/pynq_libraries.html#iops) and the [PYNQ MicroBlaze documentation](https://pynq.readthedocs.io/en/latest/pynq_libraries.html#pynqmicroblaze). 
+For more information see the [PYNQ IOP documentation](https://pynq.readthedocs.io/en/latest/pynq_libraries.html#pynq-iops) and the [PYNQ MicroBlaze documentation](https://pynq.readthedocs.io/en/latest/pynq_libraries.html#pynqmicroblaze).
 
 ### Trace Analyzer
 
