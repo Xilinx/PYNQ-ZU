@@ -15,7 +15,6 @@
 </head>
 
 <body>
-  <div class="wrapper">
     <section class="pynqbanner">
       <div class="pynq_container">
         <img class="pynq_background" src="./images/banner.png">
@@ -27,61 +26,69 @@
       </div>
     </section>
 
-    <section class="navcontent">
-    <div class="nav-container">
-      <div class="gallery">
-        <a href="./images/01_PYNQ-ZU.png" width="250"></a>
-          <img src="./images/01_PYNQ-ZU_t.png" width="250px">
-        </a>
-        <div class="caption">
-          <a href="./images/01_PYNQ-ZU.png">(Click to enlarge)</a>
+
+    <nav>
+        <div class="logo">
+            <a href="images/01_PYNQ-ZU.png"><center><img alt="" src="images/01_PYNQ-ZU.png" style="display: block" border="0"></center></a>
         </div>
-    </div>
-      <nav>
-        <div class="logo-section">
-          <a class="logo" style="text-align: center;">PYNQ-ZU</a>
-        </div>
+        <span class="mobi">
+          PYNQ-ZU
+        </span>
         <label for="btn" class="icon">
-          <span class="fa fa-bars" font-size="50px"></span>
+            <span class="fa fa-bars"></span>
         </label>
         <input type="checkbox" id="btn">
         <ul class="navbar-ul">
-          <li><label for="btn-1" class="show" style="color:#393939">Navigation </label></li>
-          <li class="listedpages"><a href="index.html">Home</a></li>
-          <li class="listedpages"><a href="./getting_started.html">Getting started</a> </li>
-          <li class="listedpages"><a href="./overview.html">Board overview</a> </li>
-          <li class="listedpages"><a href="./support.html">Support</a> </li>
-          <li class="listedpages"><a href="./overlays.html">Overlays</a> </li>
-          <li class="listedpages"><a href="https://www.tulembedded.com/FPGA/ProductsPYNQ-ZU.html">Where to buy</a> </li>
-          <li><label for="btn-1" class="show" style="color:#393939">Documents </label></li>
-          <li class="listedpages"><a href="./pdf/PYNQ-ZU_ReferenceUser_Manual_v1_2.pdf">PYNQ-ZU User Manual</a></li>
-          <li class="listedpages"><a href="./pdf/XUP-ZU5EG-20200824.pdf">PYNQ-ZU schematics (pdf)</a></li>
-          <li><label for="btn-1" class="show" style="color:#393939">Downloads </label></li>
-          <li class="listedpages"><a href="https://bit.ly/PYNQZUv2_6">PYNQ-ZU image (zip)</a></li>
-          <li class="listedpages"><a href="https://github.com/Xilinx/XilinxBoardStore/tree/master/boards/TUL/pynqzu/1.1">PYNQ-ZU board files (zip)</a></li>
-          <li class="listedpages"><a href="./pynqzu_master.xdc">PYNQ-ZU Master XDC file</a></li>
-        </ul>
-      </nav>
-    </div>
-    </section>
+            <li><label for="btn-2" class="show">Navigation </label></li>
+            {% for item in site.data.navigation.docs %}
+            <li class="listedpages"><a href="{{ item.url }} ">{{ item.title }}</a></li>
+            {% endfor %}
 
-            <section class="text">
+            <li><label for="btn-2" class="show">Documents </label></li>
+            {% for item in site.data.documents.docs %}
+            <li class="listedpages"><a href="{{ item.url }} ">{{ item.title }}</a></li>
+            {% endfor %}
+
+            <li><label for="btn-2" class="show">Downloads </label></li>
+            {% for item in site.data.downloads.docs %}
+            <li class="listedpages"><a href="{{ item.url }}">{{ item.title }}</a></li>
+            {% endfor %}
+        </ul>
+    </nav>
+
+    <div class="wrapper">
+        <div class="wrapper">
+            <section class="content">
                 {{ content }}
             </section>
-      <footer>
-        <a class="buttons github" href="{{ site.github.repository_url }}"><b>View on GitHub</b></a>
-      </footer>
-    </div>
-    <script src="{{ "/assets/js/scale.fix.js" | relative_url }}"></script>
-    {% if site.google_analytics %}
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-      ga('create', '{{ site.google_analytics }}', 'auto');
-      ga('send', 'pageview');
-    </script>
-    {% endif %}
-  </body>
+
+
+            <footer>
+
+                <p href="https://github.com/Zacarhay/PYNQ-ZU" class="sometext" style="font-size: 15px; line-height: 1.4em; padding: 0px 0px 0px 0px;">
+                    <a href="https://github.com/Zacarhay/PYNQ-ZU" style="text-align:center" class="buttons github"><b>View on Github</b></a>
+                </p>
+            </footer>
+
+        </div>
+        <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+        {% if site.google_analytics %}
+        <script>
+            (function(i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function() {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+            ga('create', '{{ site.google_analytics }}', 'auto');
+            ga('send', 'pageview');
+        </script>
+        {% endif %}
+</body>
+
 </html>
