@@ -23,7 +23,7 @@ check_timing:
 	vivado -mode batch -source check_timing.tcl -notrace
 
 clean:
-	rm -rf $(overlay_name) *.jou *.log NA .Xil *.zip
+	rm -rf $(overlay_name) *.jou *.log NA .Xil *.zip *.str
 
 distclean: clean
 	rm -rf ip/

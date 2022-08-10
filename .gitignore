@@ -2,5 +2,4 @@
 *.jou
 __pycache__/
 .ipynb_checkpoints/
-base/
-ip/
+*.str
