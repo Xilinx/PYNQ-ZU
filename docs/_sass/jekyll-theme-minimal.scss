@@ -2,9 +2,7 @@
 @import url('https://fonts.googleapis.com/css?family=Arvo:400,700,400italic');
 
 /* MeyerWeb Reset */
-html{
-    max-width: 1500px;
-}
+
 html,
 body,
 div,
@@ -86,279 +84,86 @@ time,
 mark,
 audio,
 video {
-    margin: auto;
+    margin: 0;
     padding: 0;
     border: 0;
-    font: 14px/1.5 "Noto Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font: inherit;
     vertical-align: baseline
 }
-
-.allcontent{
-    background-color: #000;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #232323;
+    margin: 36px 0 10px
 }
 
-.logo {
-    font-size: 28px;
-    font-weight: bold;
+p,
+ul,
+ol,
+table,
+dl {
+    margin-top: 7px;
+    margin-bottom: 7px;
 }
 
-body {
-    font: 14px/1.5 "Noto Sans";
-    font-weight:400;
-    font-size: 14px;
-    color: #323232;
-    background-color: #fff;
-    line-height: 1.8em;
-    -webkit-font-smoothing: antialiased;
+.vid{
+    position: relative;
+    width: 100%;
+    max-width: 560px;
+    aspect-ratio: 16/9;
+    height: auto;
 }
 
-html{
-    background-color: #f0f0f0;
+h1,
+h2,
+h3 {
+    font-family: Arvo, Monaco, serif;
+    line-height: 1.3;
+    font-weight: normal
 }
 
-a{
-    font-weight: bold;
-}
-
-img{
-    z-index: 1;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  color:#222;
-  margin:0 0 20px;
-}
-
-p, ul, ol, table, pre, dl {
-  margin:0 0 20px;
-}
-
-h1, h2, h3 {
-  line-height:1.1;
+h1,
+h2,
+h3 {
+    display: block;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px
 }
 
 h1 {
-  font-size:28px;
+    font-size: 30px
 }
 
 h2 {
-  color:#393939;
+    font-size: 24px
 }
 
-h3, h4, h5, h6 {
-  color:#494949 ;
+h3 {
+    font-size: 18px
 }
 
-header a {
-  font-weight: bold;
-}
-
-.section1 {
-    width: 1000px;
-    float: right;
-    padding-bottom: 50px;
-    text-align: center;
-}
-
-.wrapper ul {
-    padding-left: 40px;
-    font: 14px/1.5;
-}
-
-p-list {
-    display: block;
-}
-
-@media print,
-screen and (min-width: 1201px) {
-    nav {
-        background-color: #fff;
-        color: transparent;
-        list-style-type: none;
-        width: 210px;
-        float: left;
-        padding-left: 20px;
-        position: relative;
-        -webkit-border-top-right-radius: 4px;
-        -webkit-border-bottom-right-radius: 4px;
-        -moz-border-radius-topright: 4px;
-        -moz-border-radius-bottomright: 4px;
-        border-top-right-radius: 4px;
-        border-bottom-right-radius: 4px;
-        padding: 0px 0px 6px 4px;
-        -webkit-font-smoothing: antialiased;
-        z-index: 300;
-    }
-    *{
-        margin-left: 10px;
-        margin-right: 10px;
-    }
-    body{
-        margin-left: 0px;
-    }
-    .logo{
-        display: none;
-    }
-    .listedpages {
-        color: #e63380;
-        list-style-type: none;
-        width: 190px;
-        height: 13px;
-        margin-bottom: 2px;
-        line-height: 1em;
-        padding: 5px 5px 5px 5px;
-    }
-    li .listedpages a{
-        color: #e63380;
-    }
-    li .listedpages a:hover {
-        color: #b6165b;
-    }
-    .nav-container{
-        padding-top: 0px;
-        border: none;
-        position: relative;
-        width: 250px;
-        z-index: 300;
-    }
-    .pynq_container{
-        position: relative;
-        color: white;
-        text-align: center;
-        
-    }
-    .pynq_banner_background{
-        height: 60px; 
-        background-color: rgba(240, 135, 180, 0.75); 
-        position: absolute; 
-        top: 35px; 
-        text-align: center;
-        margin-left: 100px; 
-        margin-right: 100px;
-        width: 88%;
-        background-size: cover;
-        z-index: 300;
-    }
-    .pynq_banner_text{
-        max-width: 1000px;
-        width : 800px; 
-        margin: 10px; 
-        height: 30px; 
-        line-height: 1.2; 
-        font-family: Oswald;
-        font-size: 32px; 
-        font-weight: 300;
-        text-align: left;
-    } 
-    .pynq_background{
-        max-width: 90%;
-        height: 100px;
-        border: none;
-        padding-left: 20px;
-        z-index: 1;
-    } 
-    .you-container1 {
-        position: relative;
-        padding-bottom: 0px;
-        height: 400px;
-        overflow: hidden;
-        padding-top: 0px;
-        width: 70%;
-    }
-    .you-container2 {
-        position: relative;
-        padding-bottom: 0px;
-        height: 400px;
-        overflow: hidden;
-        padding-top: 50px;
-        width: 70%;
-    }
-    .otherheading,
-    .icon,
-    input {
-        display: none
-    }
-    .text {
-        width: 70%;
-        float: right;
-        padding-bottom: 50px;
-        padding-right: 50px;
-    }
-    .wrapper{
-        margin-left: 10%;
-        margin-top: 0px;
-    }
-    .gallery{
-        width: 250px;
-        border-width: 0px;
-        text-align: center;
-    }
-    .navcontent{
-        float: left;
-        z-index: 300;
-    }
-    .pynqbanner{
-        width: 100%;
-    }
-    .show {
-        color: #393939;
-        font-size: 18px;
-        font-weight: bold;
-        line-height: 1.3em;
-        border-bottom: none;
-        margin-top: 0;
-        display: block;
-        list-style-type: none;
-        padding-top: 25px;
-    }
-    .listedpages {
-        color: #e63380;
-        list-style-type: none;
-        width: 190px;
-        height: 13px;
-        margin-bottom: 2px;
-        line-height: 1em;
-        padding: 5px 5px 5px 5px;
-    }
-    li .listedpages a{
-        color: #e63380;
-        font-weight: bold;
-    }
-    li .listedpages a:hover {
-        color: #b6165b;
-    }
-    a {
-    color:#e63380;
-    text-decoration:none;
-    font-weight: bold;
-    }
-    li a:hover, li a:focus {
-        color:#b6165b;
-        font-weight: bold;
-    }  
-    a small {
-        font-size:11px;
-        color:#777;
-        margin-top:-0.3em;
-        display:block;
-    }  
-    a:hover small {
-        color:#aaa;
-    }
-    img{
-        z-index: 1;
-    }
-}
-
-section.navcontent{
-    margin: 0px;
+h4,
+h5,
+h6 {
+    font-family: Arvo, Monaco, serif;
+    font-weight: 700
 }
 
 a {
     color: #e63380;
     font-weight: 200;
-    text-decoration: none;
-    font-weight: bold;
+    text-decoration: none
+}
+
+a:hover {
+    color: #b6165b;
+}
+
+a small {
+    font-size: 12px
 }
 
 em {
@@ -367,6 +172,12 @@ em {
 
 strong {
     font-weight: 700
+}
+
+ol {
+    list-style-position: inside;
+    list-style: decimal;
+    padding-left: 25px
 }
 
 blockquote {
@@ -406,12 +217,10 @@ hr {
 img {
     position: relative;
     margin: 0 auto;
-    max-width: 1000px;
-    padding: 5px;
-    margin: 0px 0 0px 0;
-    border: 0px solid #ccc;
-    z-index: 1;
-    text-align: center;
+    max-width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin: 10px 0 10px 0;
 }
 
 p img,
@@ -454,6 +263,7 @@ table {
 }
 
 th {
+    font-family: 'Arvo', Helvetica, Arial, sans-serif;
     font-size: 15px;
     font-weight: normal;
     padding: 10px;
@@ -471,15 +281,8 @@ td {
     color: White;
 }
 
-.wrapper {
-    width: 1200px;
-    display: inline-block;
-    height: fit-content;
-}
-
 a.buttons {
     -webkit-font-smoothing: antialiased;
-    background: url(../images/arrow-down.png) no-repeat;
     font-weight: normal;
     padding: 2px 2px 2px 22px;
     height: 30px
@@ -489,20 +292,8 @@ a.github {
     background: url(../images/mask-small.png) no-repeat 1px
 }
 
-a.youtube {
-    background: url(../images/youtube.png) no-repeat 1px;
-    background-position: right;
-    padding: 2px 2px 2px 28px
-}
-
-a.pynq {
-    background: url(../images/pynq.png) no-repeat 1px;
-    padding: 2px 2px 2px 55px
-}
-
 section {
-    width: fit-content;
-    float: right;
+    padding-bottom: 50px
 }
 
 footer {
@@ -510,68 +301,145 @@ footer {
     float: left;
     position: fixed;
     bottom: 0px;
+    padding-left: 25px
+}
+
+.logo {
+    font-size: 28px
+}
+
+body {
+    padding: 0px 0 20px 0px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #4a4a4a;
+    background-color: #fff;
+    line-height: 1.8em;
+    -webkit-font-smoothing: antialiased;
+}
+
+.section1 {
+    padding-bottom: 50px;
+    text-align: center;
+}
+
+.wrapper ul {
+    padding-left: 40px;
+}
+
+p-list {
+    display: block;
 }
 
 @media print,
-screen and (max-width: 1200px) {
-    .text{
-        margin-left: 25px;
-        margin-right: 25px;
-        margin-top: 0px;
-        padding-top: 140px;
+screen and (min-width: 1201px) {
+    p,
+    ul,
+    ol,
+    table,
+    dl {
+        margin-left: 5px;
+        margin-right: 5px;
     }
-    nav .logo-section{
-        padding-top: 10px;
+    section.content {
+        font-size: medium;
+        margin-top: 100px;
+        margin-left: 15%;
+        margin-right: 15%;
+        width: 70%;
+    }
+    .mobititle{
+        display: none;
+    }
+    nav li{
+        list-style-type: none;
+    }
+    .span{
+        display: none;
+    }
+    .pynq_wrapper{
+        width: 100%;
+        height:max-content;
+        background-color: #fff;
+    }
+    .mobi{
+        display: none;
+    }
+    .pynqbanner{
+        width:"100%";
+        margin-right: 15%;
+    }
+    .pynq_background{
+        margin: 0px 0px 0px 0px;
+        background-position: center;
+        position: absolute;
+        height: 120px;
+        width: 85%;
     }
     .pynq_banner_background{
-        height: 60px; 
-        background-color: rgba(240, 135, 180, 0.75); 
-        position: absolute; 
-        top: 35px; 
-        text-align: center;
-        margin-left: 100px; 
-        margin-right: 100px;
-        width: 88%;
-        background-size: cover;
-        z-index: 300;
+        z-index: 10;
+        background-color: #fff;
     }
-    nav{
-        color:rgba(240, 135, 180, 1);
-        position: fixed;
-        z-index: 300;
+    .pynq_banner_text{
+        background-color: rgba(240,135,180,0.75);
+        color:#fff;
+        font-size: 50px;
+        height: 50px;
+        width:85%;
+        padding-top: 25px;
+        margin: 30px 0px 0px 0px;
+        z-index: 10;
+        text-indent: 50px;
+        position: absolute;
     }
-    .nav ul{
-        color:rgba(240, 135, 180, 1);
-        z-index: 300;
+    nav {
+        background-color: #fff;
+        color: #000;
+        width: 13%;
+        height: auto;
+        margin-top: 80px;
+        font-size: medium;
+        float: left;
+        position: absolute;
+        padding: 0px 0px 6px 4px;
+        -webkit-font-smoothing: antialiased;
+        z-index: 9999;
     }
-    div.wrapper {
-        width: auto;
-        margin: 0
+    nav ul li a {
+        color: #e63380;
+        text-decoration: none;
     }
-    .pynq_container, .pynq_banner_background, .pynq_banner_text {
-        display: none;
+    nav ul li a:hover {
+        color: #b6165b;
+        text-decoration: none;
     }
-    .nav {
-        width: 968px;
-        position: fixed;
+    .listedpages {
+        color: #e63380;
+        width: 90%;
+        height: auto;
+        margin-bottom: 2px;
+        line-height: 1em;
+        padding: 5px 5px 5px 30px;
+        list-style-type: none;
     }
-    header,
-    section,
-    footer {
-        float: none;
-        position: static;
-        width: auto
+    .listedpages:hover {
+        color: #b6165b;
     }
-    footer {
-        display: none;
-        margin: 0 84px 0 50px;
+    .show {
+        color: #000;
+        font-family: Arvo, sans-serif;
+        font-size: 18px;
+        font-weight: 300;
+        line-height: 1.3em;
+        border-bottom: none;
+        margin-top: 20px;
+        margin-left: 10px;
+        list-style-type: none;
     }
-    header {
-        padding-right: 320px
-    }
-    section {
-        padding: 0px 0px 0px 0px;
-        margin: 0 0 0px
+    .otherheading,
+    .icon,
+    input {
+        display: none
     }
     .section1 {
         width: 1000px;
@@ -579,90 +447,220 @@ screen and (max-width: 1200px) {
         padding-bottom: 50px;
         text-align: center;
     }
-    .faqs {
-        display: block;
+    .enlarge {
+        color: #e63380;
+        font-size: large;
+        text-decoration: none;
     }
-    header a small {
-        display: inline
+    .enlarge:hover{
+        color: #b6165b;
     }
-    header ul {
+    .caption{
+        text-align: center;
+    }
+    .wrapper {
+        width: 100%;
+        min-height: 100vh;
+    }
+    .otherheading,
+    .icon,
+    input {
+        display: none
+    }
+    .section1 {
+        width: 1000px;
+        float: right;
+        padding-bottom: 50px;
+        text-align: center;
+    }
+    .logo{
+        width: 100%;
+    }
+}
+
+
+@media print,
+screen and (min-width: 769px) and (max-width: 1200px) {
+    p,
+    ul,
+    ol,
+    table,
+    dl {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+    .mobi{
+        display: none;
+    }
+    section.content {
+        font-size: medium;
+        margin-top: 100px;
+        margin-left: 25%;
+        width: 73%;
+        margin-right: 2%;
+    }
+    nav li{
+        list-style-type: none;
+    }
+    .mobititle{
+        display: none;
+    }
+    .span{
+        display: none;
+    }
+    .pynq_wrapper{
+        width: 100%;
+        height:max-content;
+        background-color: #fff;
+    }
+    .pynqbanner{
+        width: 100%;
+    }
+    .pynq_background{
+        margin: 0px 0px 0px 0px;
+        background-position: center;
         position: absolute;
-        right: 130px;
-        top: 84px
+        height: 120px;
+        width: 100%;
     }
-    .buttons-github {
-        text-align: center
+    .pynq_banner_background{
+        z-index: 10;
+        background-color: #fff;
     }
-    .you-container1 {
-        position: relative;
-        padding-bottom: 0px;
-        height: 250px;
-        overflow: hidden;
-        padding-top: 0px;
+    .pynq_banner_text{
+        background-color: rgba(240,135,180,0.75);
+        color:#fff;
+        font-size: 50px;
+        height: 50px;
+        width:100%;
+        padding-top: 25px;
+        margin: 30px 0px 0px 0px;
+        z-index: 10;
+        text-indent: 50px;
+        position: absolute;
     }
-    .you-container2 {
-        position: relative;
-        padding-bottom: 0px;
-        height: 250px;
-        overflow: hidden;
-        padding-top: 50px;
+    nav {
+        background-color: #fff;
+        color: #000;
+        width: 23%;
+        height: auto;
+        margin-top: 80px;
+        font-size: medium;
+        float: left;
+        position: absolute;
+        padding: 0px 0px 6px 4px;
+        -webkit-font-smoothing: antialiased;
+        z-index: 9999;
     }
-    .sometext,
-    .buttons-github {
-        display: none;
+    nav ul li a {
+        color: #e63380;
+        text-decoration: none;
     }
-    .gallery{
-        display: none;
+    nav ul li a:hover {
+        color: #b6165b;
+        text-decoration: none;
     }
-    img{
-        z-index: 1;
+    .listedpages {
+        color: #e63380;
+        width: 90%;
+        height: auto;
+        margin-bottom: 2px;
+        line-height: 1em;
+        padding: 5px 5px 5px 30px;
+        list-style-type: none;
+    }
+    .listedpages:hover {
+        color: #b6165b;
+    }
+    .show {
+        color: #000;
+        font-family: Arvo, sans-serif;
+        font-size: 18px;
+        font-weight: 300;
+        line-height: 1.3em;
+        border-bottom: none;
+        margin-top: 20px;
+        margin-left: 10px;
+        list-style-type: none;
+    }
+    .otherheading,
+    .icon,
+    input {
+        display: none
+    }
+    .enlarge {
+        color: #e63380;
+        font-size: large;
+        text-decoration: none;
+    }
+    .enlarge:hover{
+        color: #b6165b;
+    }
+    .caption{
+        text-align: center;
+    }
+    .wrapper {
+        width: 100%;
+    }
+    .otherheading,
+    .icon,
+    input {
+        display: none
+    }
+    .logo{
+        width: 100%;
     }
 }
 
 @media print,
-screen and (max-width: 720px) {
-    body {
-        word-wrap: break-word;
+screen and (max-width: 768px) {
+    p,
+    ul,
+    ol,
+    table,
+    dl {
+        margin-left: 0px;
         margin-right: 0px;
     }
-    nav .logo-section{
-        padding-top: 10px;
+    .pynqbanner{
+        display: none;
     }
-    section {
-        padding: 0px 0px 0px 0px;
-        margin: 0 0 0px;
+    .icon,
+    input {
+        display: none
     }
-    .text{
-        margin-left: 25px;
-        margin-right: 25px;
-        margin-top: 0px;
-        padding-top: 140px;
+    nav {
+        background: rgba(240,135,180,1);
+        width: 100%;
+        height: 100px;
+        }
+    .nav * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Roboto';
+        z-index: 999999
     }
-    .nav {
-        width: 720px;
+    .show+a,
+    .navbar-ul {
+        display: none
     }
-    .pynq_banner_background{
-        height: 60px; 
-        background-color: rgba(240, 135, 180, 0.75); 
-        position: absolute; 
-        top: 35px; 
-        text-align: center;
-        margin-left: 100px; 
-        margin-right: 100px;
-        width: 88%;
-        background-size: cover;
-        z-index: 300;
+    [id^=btn]:checked+ul {
+        display: block
+    }
+    body {
+        word-wrap: break-word;
+        margin-right: 0px
     }
     header {
         padding: 10px 20px 0;
         margin-right: 0px;
         margin-left: 20px
     }
-    .section1 {
-        width: 1000px;
-        float: right;
-        padding-bottom: 50px;
-        text-align: center;
+    section {
+        width: 90%;
+        padding-right: 5%;
+        padding-left: 5%;
     }
     .faqs {
         display: block;
@@ -678,157 +676,18 @@ screen and (max-width: 720px) {
     .buttons-github {
         text-align: center
     }
-    .you-container1 {
-        position: relative;
-        padding-bottom: 0px;
-        height: 250px;
-        overflow: hidden;
-        padding-top: 0px;
-    }
-    .you-container2 {
-        position: relative;
-        padding-bottom: 0px;
-        height: 250px;
-        overflow: hidden;
-        padding-top: 50px;
+    .menu-text {
+        color: #fff;
     }
     .sometext,
     .buttons-github {
         display: none;
     }
-    img{
-        z-index: 1;
-    }
-    .text{
-        margin-left: 25px;
-        margin-right: 25px;
-        margin-top: 0px;
-        padding-top: 140px;
-    }
-}
-
-@media print,
-screen and (max-width: 480px) {
-    header ul li.download {
-        display: none
-    }
-    .pynq_banner_background{
-        height: 60px; 
-        background-color: rgba(240, 135, 180, 0.75); 
-        position: absolute; 
-        top: 35px; 
-        text-align: center;
-        margin-left: 100px; 
-        margin-right: 100px;
-        width: 88%;
-        background-size: cover;
-        z-index: 300;
-    }
-    section {
-        padding: 0px 0px 0px 0px;
-        margin: 0 0 0px
-    }
-    .text{
-        margin-left: 25px;
-        margin-right: 25px;
-        margin-top: 0px;
-        padding-top: 140px;
-    }
-    footer {
-        margin: 0 0 0 20px;
-        display: none;
-    }
-    .nav {
-        width: 480px;
-    }
-    footer a {
-        display: block
-    }
-    .buttons-github {
-        text-align: center
-    }
-    .faqs {
-        display: block;
-    }
-    .you-container1 {
-        position: relative;
-        padding-bottom: 0px;
-        height: 250px;
-        overflow: hidden;
-        padding-top: 0px;
-    }
-    .you-container2 {
-        position: relative;
-        padding-bottom: 0px;
-        height: 250px;
-        overflow: hidden;
-        padding-top: 50px;
-    }
-    .section1 {
-        width: 1000px;
-        float: right;
-        padding-bottom: 50px;
-        text-align: center;
-    }
-    .sometext,
-    .buttons-github {
-        display: none;
-    }
-    img{
-        z-index: 1;
-    }
-}
-
-@media print {
-    body {
-        padding: 0.4in;
-        font-size: 12pt;
-        color: #444
-    }
-    .buttons-github {
-        text-align: center
-    }
-    .you-container1 {
-        position: relative;
-        padding-bottom: 0px;
-        height: 250px;
-        overflow: hidden;
-        padding-top: 0px;
-    }
-    .you-container2 {
-        position: relative;
-        padding-bottom: 0px;
-        height: 250px;
-        overflow: hidden;
-        padding-top: 50px;
-    }
-    .section1 {
-        width: 1000px;
-        float: right;
-        padding-bottom: 50px;
-        text-align: center;
-    }
-    .faqs {
-        display: block;
-    }
-}
-
-.responsive {
-    max-width: 100%;
-    height: auto
-}
-
-@media print,
-screen and (max-width: 1200px) {
-    .nav * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        z-index: 300;
-    }
-    nav {
-        background: rgba(240, 135, 180, 1);
-        width: 100%
+    nav ul {
+        list-style: none;
+        z-index: 999999;
+        position: absolute;
+        margin-top: 100px;
     }
     nav:after {
         content: '';
@@ -836,100 +695,76 @@ screen and (max-width: 1200px) {
         display: table
     }
     nav .logo {
-        float: left;
-        color: white;
-        font-size: 28px;
-        font-weight: 600;
-        line-height: 70px;
-        padding-left: 60px;
-        padding-top: 20px;
-        padding-bottom: 10px
+        display: none;
     }
-    .pynq_banner_background{
-        height: 60px; 
-        background-color: rgba(240, 135, 180, 0.75); 
-        position: absolute; 
-        top: 35px; 
-        text-align: center;
-        margin-left: 100px; 
-        margin-right: 100px;
-        width: 88%;
-        background-size: cover;
-        z-index: 300;
+    nav ul li,
+    nav ul ul li {
+        display: block;
+        width: 100%;
     }
-    nav ul {
-        padding: 1;
-        float: right;
-        list-style: none;
-        margin-right:  5px;
-        position: relative;
-        z-index: 300;
+    nav ul ul ul li {
+        position: static
     }
-    nav ul li {
-        float: left;
-        background: inline-block;
-        background: rgba(240, 135, 180, 1);
-        padding-top: 10px;
-        margin: 0 2px;
-        z-index: 300;
+    nav ul ul li {
+	position: relative;
+        margin: 0px;
+        width: 150px;
+        float: none;
+        display: list-item;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.3)
     }
     nav ul li a {
-        color: white;
+        color: #fff;
         text-decoration: none;
         font-size: 18px;
-        padding: 8px 15px
-    }
-    nav ul li a:hover {
-        color: #e63380;
-        border-radius: 5px;
-        box-shadow: 0 0 5px #e63380, 0 0 5px #e63380
+        padding: 8px 15px;
     }
     nav ul ul li a:hover {
-        color: #e63380;
+        color: rgb(245, 245, 245);
         box-shadow: none
     }
     nav ul ul {
         position: absolute;
         top: 80px;
-        border-top: 3px solid #e63380;
+        border-top: 3px solid rgb(245, 245, 245);;
         opacity: 0;
         visibility: hidden;
         transition: top .3s;
         z-index: 999999
     }
+    nav ul li a:hover {
+        color: rgb(245, 245, 245);
+        border-radius: 5px;
+        box-shadow: 0 0 5px rgb(245, 245, 245), 0 0 5px #fff;
+    }
+    nav ul ul a {
+        padding-left: 80px
+    }
+    nav ul ul ul a {
+        padding-left: 160px
+    }
+    nav ul ul li a {
+        line-height: 50px
+    }
     nav ul ul ul {
         border-top: none
+    }
+    nav ul li {
+        float: left;
+        background: inline-block;
+        background: rgba(240,135,180,1);
+        padding-bottom: 10px;
+        padding-left: 10px;
+        z-index: 999999;
     }
     nav ul li:hover>ul {
         top: 70px;
         opacity: 1;
         visibility: visible
     }
-    nav ul ul li {
-        position: relative;
-        margin: 0px;
-        width: 150px;
-        float: none;
-        display: list-item;
-        border-bottom: 1px solid #b6165b;
-    }
-    nav ul ul li a {
-        line-height: 50px
-    }
-    nav ul ul ul li {
-        position: relative;
-        top: -70px;
-        left: 150px
-    }
-    .show {
-        color: #e00000;
-        font-size: 30px;
-        text-decoration: underline;
-        text-decoration: solid
-    }
     span .fa-plus {
         margin-left: 40px;
-        font-size: 30px;
+        font-size: 15px
     }
     .icon {
         padding-top: 15px
@@ -938,79 +773,60 @@ screen and (max-width: 1200px) {
     input {
         display: none
     }
-    .you-container1 {
-        position: relative;
-        padding-bottom: 0px;
-        height: 250px;
-        overflow: hidden;
-        padding-top: 0px;
-    }
-    .you-container2 {
-        position: relative;
-        padding-bottom: 0px;
-        height: 250px;
-        overflow: hidden;
-        padding-top: 50px;
-    }
-    .section1 {
-        width: 1000px;
-        float: right;
-        padding-bottom: 50px;
-        text-align: center;
-    }
-}
-
-@media all and (max-width: 1200px) {
-    nav ul {
-        margin-right: 5px;
-        float: left
-    }
-    nav .logo {
-        padding-left: 30px;
-        width: 80%;
-        padding-top: 10px
-    }
-    nav ul li,
-    nav ul ul li {
-        display: block;
-        width: 100%
-    }
-    nav ul ul {
-        top: 70px;
-        position: static;
-        border-top: none;
-        float: none;
-        display: none;
-        opacity: 1;
-        visibility: visible
-    }
-    nav ul ul ul li {
-        position: static
-    }
-    nav ul ul li {
-        border-bottom: 0px
-    }
-    nav ul ul a {
-        padding-left: 80px
-    }
-    nav ul ul ul a {
-        padding-left: 160px
-    }
     .icon {
         display: block;
         color: white;
         position: absolute;
         right: 40px;
-        padding-top: 35px;
+        padding-top: 25px;
         line-height: 25px;
-        font-size: 5px;
+        font-size: 50px;
         cursor: pointer
     }
-    .fa {
-        font: 30px/1.5 "Noto Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    .mobi{
+        color:#fff;
+        font-size: 50px;
+        height: 50px;
+        position: absolute;
+        padding-top: 40px;
+        padding-left: 25px;
     }
-    nav ul li a:hover {
-        box-shadow: none
+    .wrapper{
+        width: 100%;
+    }
+    .show {
+        color: #000;
+        font-family: Arvo, sans-serif;
+        font-size: 18px;
+        font-weight: 300;
+        line-height: 1.3em;
+        border-bottom: none;
+        margin-top: 20px;
+        margin-left: 10px;
+        list-style-type: none;
+    }
+}
+
+@media print,
+screen and (max-width: 480px) {
+    .pynqbanner{
+        display: none;
+    }
+    .icon,
+    input {
+        display: none
+    }
+    nav {
+        background: rgba(240,135,180,1);
+        width: 100%;
+        height: 100px;
+        }
+    .nav * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Roboto';
+        z-index: 999999
     }
     .show+a,
     .navbar-ul {
@@ -1019,48 +835,54 @@ screen and (max-width: 1200px) {
     [id^=btn]:checked+ul {
         display: block
     }
-    .show {
-        color: #ff0000;
-        font-size: 25px;
-        text-decoration: underline;
-        text-decoration: solid;
-        padding-left: 15px
+    body {
+        word-wrap: break-word;
+        margin-right: 0px
     }
-    .you-container1 {
-        position: relative;
-        padding-bottom: 0px;
-        height: 250px;
-        overflow: hidden;
-        padding-top: 0px;
+    header {
+        padding: 10px 20px 0;
+        margin-right: 0px;
+        margin-left: 20px
     }
-    .you-container2 {
-        position: relative;
-        padding-bottom: 0px;
-        height: 250px;
-        overflow: hidden;
-        padding-top: 50px;
+    section {
+        width: 90%;
+        padding-right: 5%;
+        padding-left: 5%;
     }
-    .section1 {
-        width: 1000px;
-        float: right;
-        padding-bottom: 50px;
-        text-align: center;
+    .faqs {
+        display: block;
     }
-}
-
-@media all and (max-width: 1200px) {
+    footer {
+        margin: 0 0 0 30px;
+        display: none;
+    }
+    header ul,
+    header p.view {
+        position: static
+    }
+    .buttons-github {
+        text-align: center
+    }
+    .menu-text {
+        color: #fff;
+    }
+    .sometext,
+    .buttons-github {
+        display: none;
+    }
     nav ul {
-        margin-right: 5px;
-        float: left
+        list-style: none;
+        z-index: 999999;
+        position: absolute;
+        margin-top: 100px;
     }
-    nav .logo-section{
-      background-image: "./images/banner.png";
-      width: 100%;
-      padding-top: 10px;
+    nav:after {
+        content: '';
+        clear: both;
+        display: table
     }
     nav .logo {
-        padding-left: 40px;
-        width: 80%;
+        display: none;
     }
     nav ul li,
     nav ul ul li {
@@ -1080,7 +902,22 @@ screen and (max-width: 1200px) {
         position: static
     }
     nav ul ul li {
-        border-bottom: 0px
+	position: relative;
+        margin: 0px;
+        width: 150px;
+        float: none;
+        display: list-item;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.3)
+    }
+    nav ul li a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 18px;
+        padding: 8px 15px;
+    }
+    nav ul li a:hover {
+        color: #fff;
+        text-decoration: none;
     }
     nav ul ul a {
         padding-left: 80px
@@ -1088,46 +925,96 @@ screen and (max-width: 1200px) {
     nav ul ul ul a {
         padding-left: 160px
     }
+    nav ul ul li a {
+        line-height: 50px
+    }
+    nav ul ul ul {
+        border-top: none
+    }
+    nav ul li {
+        float: left;
+        background: inline-block;
+        background: rgba(240,135,180,1);
+        padding-bottom: 10px;
+        padding-left: 10px;
+        z-index: 999999;
+    }
+    nav ul li:hover>ul {
+        top: 70px;
+        opacity: 1;
+        visibility: visible
+    }
+    nav ul ul li a:hover {
+        color: rgb(245, 245, 245);
+        box-shadow: none
+    }
+    nav ul ul {
+        position: absolute;
+        top: 80px;
+        border-top: 3px solid rgb(245, 245, 245);;
+        opacity: 0;
+        visibility: hidden;
+        transition: top .3s;
+        z-index: 999999
+    }
+    nav ul li a:hover {
+        color: rgb(245, 245, 245);
+        border-radius: 5px;
+        box-shadow: 0 0 5px rgb(245, 245, 245), 0 0 5px #fff;
+    }
+    span .fa-plus {
+        margin-left: 40px;
+        font-size: 15px
+    }
+    .icon {
+        padding-top: 15px
+    }
+    .icon,
+    input {
+        display: none
+    }
     .icon {
         display: block;
         color: white;
         position: absolute;
         right: 40px;
-        padding-top: 35px;
+        padding-top: 31px;
         line-height: 25px;
-        font-size: 25px;
+        font-size: 30px;
         cursor: pointer
     }
-    nav ul li a:hover {
-        box-shadow: none
+    .mobi{
+        color:#fff;
+        font-size: 30px;
+        height: 50px;
+        position: absolute;
+        padding-top: 35px;
+        padding-left: 25px;
     }
-    .show+a,
-    .navbar-ul {
-        display: none
-    }
-    [id^=btn]:checked+ul {
-        display: block
+    .wrapper{
+        width: 100%;
     }
     .show {
-        color: #ff0000;
-        font-size: 25px;
-        text-decoration: underline;
-        text-decoration: solid;
-        padding-left: 15px
+        color: #000;
+        font-family: Arvo, sans-serif;
+        font-size: 18px;
+        font-weight: 300;
+        line-height: 1.3em;
+        border-bottom: none;
+        margin-top: 20px;
+        margin-left: 10px;
+        list-style-type: none;
     }
-    .you-container1 {
-        position: relative;
-        padding-bottom: 0px;
-        height: 250px;
-        overflow: hidden;
-        padding-top: 0px
+}
+
+@media print {
+    body {
+        padding: 0.4in;
+        font-size: 12pt;
+        color: #444
     }
-    .you-container2 {
-        position: relative;
-        padding-bottom: 0px;
-        height: 250px;
-        overflow: hidden;
-        padding-top: 50px;
+    .buttons-github {
+        text-align: center
     }
     .section1 {
         width: 1000px;
@@ -1135,6 +1022,14 @@ screen and (max-width: 1200px) {
         padding-bottom: 50px;
         text-align: center;
     }
+    .faqs {
+        display: block;
+    }
+}
+
+.responsive {
+    max-width: 100%;
+    height: auto
 }
 
 table img {

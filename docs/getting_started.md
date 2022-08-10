@@ -20,14 +20,14 @@ This guide will show you how to setup your computer and PYNQ-ZU board using PYNQ
 
 You can watch the getting started video guide, or follow the instructions below.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/7ZcEtYGxKao" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe class="vid" src="https://www.youtube.com/embed/7ZcEtYGxKao" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
 ## Setup instructions
 
 ### Prepare a Micro SD card
 
-* Download the [PYNQ-ZU v2.7 PYNQ image]() and write the image to a Micro SD card
+* Download the [PYNQ-ZU v2.7 PYNQ image](http://www.pynq.io/board.html) and write the image to a Micro SD card
 
 ### Setup the board
 

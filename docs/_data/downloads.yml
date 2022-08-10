@@ -1,0 +1,11 @@
+docs_list_title: downloads
+docs:
+
+- title: PYNQ-ZU image (zip)
+  url: https://bit.ly/PYNQZUv2_6
+  
+- title: PYNQ-ZU board files (zip)
+  url: https://github.com/Xilinx/XilinxBoardStore/tree/master/boards/TUL/pynqzu/1.1
+
+- title: PYNQ-ZU Master XDC file (zip)
+  url: ./pynqzu_master.xdc

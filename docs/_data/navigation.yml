@@ -1,0 +1,20 @@
+docs_list_title: navigation
+docs:
+
+- title: Home
+  url: index.html
+  
+- title: Getting started
+  url: getting_started.html
+
+- title: Board overview
+  url: overview.html
+
+- title: Support
+  url: support.html
+
+- title: Overlays
+  url: overlays.html
+
+- title: Where to buy
+  url: https://www.tulembedded.com/FPGA/ProductsPYNQ-ZU.html

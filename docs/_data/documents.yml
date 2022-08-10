@@ -1,0 +1,8 @@
+docs_list_title: documents
+docs:
+
+- title: PYNQ-ZU user manual (pdf)
+  url: ./pdf/PYNQ-ZU_ReferenceUser_Manual_v1_2.pdf
+  
+- title: PYNQ-ZU schematics (pdf)
+  url: https://www.tul.com.tw/images/XUP-ZU5EG-20200824.pdf
