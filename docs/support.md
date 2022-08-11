@@ -82,5 +82,8 @@ Check the [PYNQ Documentation](http://pynq.readthedocs.io/) for FAQs related to 
     root    1434  1405  0 09:16 pts/0   00:00:00
     ```
 
+    ---------------------------------------
+<p class="copyright">Copyright&copy; 2022 Advanced Micro Devices</p>
+
   
 

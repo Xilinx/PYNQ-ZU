@@ -45,3 +45,7 @@ make BOARDDIR=<LOCAL_PYNQ-ZU_REPO>
 Once the build has completed, if successful an SD card image will be available under the PYNQ repo directory  `<LOCAL_PYNQ_REPO>/sdbuild/output/Pynq-ZU-2.7.0.img`.
 
 Use Etcher or Win32DiskImager to write this image to an SD card. 
+
+
+---------------------------------------
+<p class="copyright">Copyright&copy; 2022 Advanced Micro Devices</p>
