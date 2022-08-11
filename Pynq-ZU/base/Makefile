@@ -10,7 +10,7 @@ all: hls_ip block_design bitstream check_timing
 	@echo
 
 hls_ip:
-	./build_ip_setup.sh
+	git submodule init && git submodule update
 	vivado -mode batch -source build_ip.tcl -notrace
 
 block_design:
@@ -23,7 +23,7 @@ check_timing:
 	vivado -mode batch -source check_timing.tcl -notrace
 
 clean:
-	rm -rf $(overlay_name) *.jou *.log NA .Xil *.zip
+	rm -rf $(overlay_name) *.jou *.log NA .Xil *.zip *.str
 
 distclean: clean
 	rm -rf ip/

@@ -57,6 +57,8 @@
  #
  # 2.70 mr    Update to Vivado 2020.2
  #
+# 3.00 mr     Update to Vivado 2020.2
+ #
  #
  # </pre>
  #
@@ -83,7 +85,7 @@ set script_folder [_tcl::get_script_folder]
 ################################################################
 # Check if script is running in correct Vivado version.
 ################################################################
-set scripts_vivado_version 2020.2
+set scripts_vivado_version 2022.1
 set current_vivado_version [version -short]
 
 if { [string first $scripts_vivado_version $current_vivado_version] == -1 } {
@@ -122,7 +124,7 @@ if { $list_projs eq "" } {
    set_property BOARD_PART tul.com.tw:pynqzu:part0:1.1 [current_project]
 }
 
-set_property  ip_repo_paths  ./ip  [current_project]
+set_property ip_repo_paths "./../../pynq/boards/ip/"  [current_project]
 update_ip_catalog
 
 # CHANGE DESIGN NAME HERE
@@ -201,7 +203,7 @@ set bCheckIPsPassed 1
 set bCheckIPs 1
 if { $bCheckIPs == 1 } {
    set list_check_ips "\ 
-xilinx.com:ip:axi_iic:2.0\
+xilinx.com:ip:axi_iic:2.1\
 user.org:user:address_remap:1.0\
 xilinx.com:user:audio_codec_ctrl:1.0\
 xilinx.com:ip:axi_intc:4.1\
@@ -211,11 +213,11 @@ xilinx.com:ip:clk_wiz:6.0\
 xilinx.com:ip:xlconcat:2.1\
 xilinx.com:ip:xlconstant:1.1\
 xilinx.com:ip:axi_gpio:2.0\
-xilinx.com:ip:util_ds_buf:2.1\
+xilinx.com:ip:util_ds_buf:2.2\
 xilinx.com:ip:xlslice:1.0\
 xilinx.com:ip:mdm:3.2\
 xilinx.com:ip:proc_sys_reset:5.0\
-xilinx.com:ip:zynq_ultra_ps_e:3.3\
+xilinx.com:ip:zynq_ultra_ps_e:3.4\
 xilinx.com:ip:dfx_axi_shutdown_manager:1.0\
 xilinx.com:ip:system_management_wiz:1.3\
 xilinx.com:user:dff_en_reset_vector:1.0\
@@ -240,9 +242,9 @@ xilinx.com:ip:lmb_v10:3.0\
 xilinx.com:ip:blk_mem_gen:8.4\
 xilinx.com:ip:lmb_bram_if_cntlr:4.0\
 xilinx.com:hls:color_convert_2:1.0\
-xilinx.com:ip:v_hdmi_rx_ss:3.1\
+xilinx.com:ip:v_hdmi_rx_ss:3.2\
 xilinx.com:hls:pixel_pack_2:1.0\
-xilinx.com:ip:v_hdmi_tx_ss:3.1\
+xilinx.com:ip:v_hdmi_tx_ss:3.2\
 xilinx.com:hls:pixel_unpack_2:1.0\
 xilinx.com:ip:vid_phy_controller:2.2\
 "
@@ -491,7 +493,7 @@ proc create_hier_cell_hdmi_out { parentCell nameHier } {
   set color_convert [ create_bd_cell -type ip -vlnv xilinx.com:hls:color_convert_2:1.0 color_convert ]
 
   # Create instance: frontend, and set properties
-  set frontend [ create_bd_cell -type ip -vlnv xilinx.com:ip:v_hdmi_tx_ss:3.1 frontend ]
+  set frontend [ create_bd_cell -type ip -vlnv xilinx.com:ip:v_hdmi_tx_ss:3.2 frontend ]
   set_property -dict [ list \
    CONFIG.C_ADDR_WIDTH {13} \
    CONFIG.C_ADD_MARK_DBG {false} \
@@ -635,7 +637,7 @@ proc create_hier_cell_hdmi_in { parentCell nameHier } {
   set color_convert [ create_bd_cell -type ip -vlnv xilinx.com:hls:color_convert_2:1.0 color_convert ]
 
   # Create instance: frontend, and set properties
-  set frontend [ create_bd_cell -type ip -vlnv xilinx.com:ip:v_hdmi_rx_ss:3.1 frontend ]
+  set frontend [ create_bd_cell -type ip -vlnv xilinx.com:ip:v_hdmi_rx_ss:3.2 frontend ]
   set_property -dict [ list \
    CONFIG.C_ADDR_WIDTH {10} \
    CONFIG.C_ADD_MARK_DBG {false} \
@@ -998,10 +1000,10 @@ proc create_hier_cell_iic_subsystem { parentCell nameHier } {
   create_bd_pin -dir I -type rst s_axil_aresetn
 
   # Create instance: iic_0, and set properties
-  set iic_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_iic:2.0 iic_0 ]
+  set iic_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_iic:2.1 iic_0 ]
 
   # Create instance: iic_1, and set properties
-  set iic_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_iic:2.0 iic_1 ]
+  set iic_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_iic:2.1 iic_1 ]
 
   # Create interface connections
   connect_bd_intf_net -intf_net Conn1 [get_bd_intf_pins S01_AXILite] [get_bd_intf_pins iic_1/S_AXI]
@@ -2321,7 +2323,7 @@ proc create_hier_cell_iop_pmod1 { parentCell nameHier } {
  ] $gpio
 
   # Create instance: iic, and set properties
-  set iic [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_iic:2.0 iic ]
+  set iic [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_iic:2.1 iic ]
 
   # Create instance: intc, and set properties
   set intc [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_intc:4.1 intc ]
@@ -2521,7 +2523,7 @@ proc create_hier_cell_iop_pmod0 { parentCell nameHier } {
  ] $gpio
 
   # Create instance: iic, and set properties
-  set iic [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_iic:2.0 iic ]
+  set iic [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_iic:2.1 iic ]
 
   # Create instance: intc, and set properties
   set intc [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_intc:4.1 intc ]
@@ -2745,10 +2747,10 @@ proc create_hier_cell_iop_grove { parentCell nameHier } {
  ] $gpio
 
   # Create instance: iic0, and set properties
-  set iic0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_iic:2.0 iic0 ]
+  set iic0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_iic:2.1 iic0 ]
 
   # Create instance: iic1, and set properties
-  set iic1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_iic:2.0 iic1 ]
+  set iic1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_iic:2.1 iic1 ]
 
   # Create instance: intc, and set properties
   set intc [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_intc:4.1 intc ]
@@ -2974,7 +2976,7 @@ proc create_root_design { parentCell } {
   set syzygy_pg [ create_bd_port -dir I syzygy_pg ]
 
   # Create instance: HDMI_CTL_axi_iic, and set properties
-  set HDMI_CTL_axi_iic [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_iic:2.0 HDMI_CTL_axi_iic ]
+  set HDMI_CTL_axi_iic [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_iic:2.1 HDMI_CTL_axi_iic ]
   set_property -dict [ list \
    CONFIG.C_SCL_INERTIAL_DELAY {10} \
    CONFIG.C_SDA_INERTIAL_DELAY {10} \
@@ -3125,7 +3127,7 @@ proc create_root_design { parentCell } {
  ] $gpio_sws
 
   # Create instance: grove0_buf, and set properties
-  set grove0_buf [ create_bd_cell -type ip -vlnv xilinx.com:ip:util_ds_buf:2.1 grove0_buf ]
+  set grove0_buf [ create_bd_cell -type ip -vlnv xilinx.com:ip:util_ds_buf:2.2 grove0_buf ]
   set_property -dict [ list \
    CONFIG.C_BUF_TYPE {IOBUF} \
    CONFIG.C_SIZE {4} \
@@ -3228,14 +3230,14 @@ proc create_root_design { parentCell } {
   create_hier_cell_mipi [current_bd_instance .] mipi
 
   # Create instance: pmod0_buf, and set properties
-  set pmod0_buf [ create_bd_cell -type ip -vlnv xilinx.com:ip:util_ds_buf:2.1 pmod0_buf ]
+  set pmod0_buf [ create_bd_cell -type ip -vlnv xilinx.com:ip:util_ds_buf:2.2 pmod0_buf ]
   set_property -dict [ list \
    CONFIG.C_BUF_TYPE {IOBUF} \
    CONFIG.C_SIZE {8} \
  ] $pmod0_buf
 
   # Create instance: pmod1_buf, and set properties
-  set pmod1_buf [ create_bd_cell -type ip -vlnv xilinx.com:ip:util_ds_buf:2.1 pmod1_buf ]
+  set pmod1_buf [ create_bd_cell -type ip -vlnv xilinx.com:ip:util_ds_buf:2.2 pmod1_buf ]
   set_property -dict [ list \
    CONFIG.C_BUF_TYPE {IOBUF} \
    CONFIG.C_SIZE {8} \
@@ -3254,7 +3256,7 @@ proc create_root_design { parentCell } {
   set proc_sys_reset_3 [ create_bd_cell -type ip -vlnv xilinx.com:ip:proc_sys_reset:5.0 proc_sys_reset_3 ]
 
   # Create instance: ps_e_0, and set properties
-  set ps_e_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:zynq_ultra_ps_e:3.3 ps_e_0 ]
+  set ps_e_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:zynq_ultra_ps_e:3.4 ps_e_0 ]
   set_property -dict [ list \
    CONFIG.PSU_BANK_0_IO_STANDARD {LVCMOS18} \
    CONFIG.PSU_BANK_1_IO_STANDARD {LVCMOS33} \
@@ -3914,7 +3916,7 @@ proc create_root_design { parentCell } {
  ] $rgbleds
 
   # Create instance: rpi_buf, and set properties
-  set rpi_buf [ create_bd_cell -type ip -vlnv xilinx.com:ip:util_ds_buf:2.1 rpi_buf ]
+  set rpi_buf [ create_bd_cell -type ip -vlnv xilinx.com:ip:util_ds_buf:2.2 rpi_buf ]
   set_property -dict [ list \
    CONFIG.C_BUF_TYPE {IOBUF} \
    CONFIG.C_SIZE {28} \
