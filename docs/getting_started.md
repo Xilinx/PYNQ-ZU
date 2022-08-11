@@ -68,7 +68,8 @@ This should bring you to the Jupyter home area where you can start to explore yo
 
  	![](./images/jupyter_home.png)
 
-
+---------------------------------------
+<p class="copyright">Copyright&copy; 2022 Advanced Micro Devices</p>
 
 
 

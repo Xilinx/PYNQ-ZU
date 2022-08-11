@@ -152,6 +152,10 @@ h6 {
     font-weight: 700
 }
 
+p.copyright{
+    text-align: center;
+}
+
 a {
     color: #e63380;
     font-weight: 200;
@@ -341,6 +345,12 @@ screen and (min-width: 1201px) {
         margin-left: 5px;
         margin-right: 5px;
     }
+    img.logoimg {
+        display: block;
+        width: 120px;
+        margin-left: auto;
+        margin-right: auto;
+    }
     section.content {
         font-size: medium;
         margin-top: 100px;
@@ -488,6 +498,12 @@ screen and (min-width: 769px) and (max-width: 1200px) {
     dl {
         margin-left: 5px;
         margin-right: 5px;
+    }
+    img.logoimg {
+        display: block;
+        width: 120px;
+        margin-left: auto;
+        margin-right: auto;
     }
     .mobi{
         display: none;
