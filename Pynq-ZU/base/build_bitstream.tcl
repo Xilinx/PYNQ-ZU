@@ -23,7 +23,7 @@ set_property platform.design_intent.external_host "false" [current_project]
 set_property platform.design_intent.datacenter "false" [current_project]
 
 # call implement
-launch_runs impl_1 -to_step write_bitstream -jobs 4
+launch_runs impl_1 -to_step write_bitstream -jobs 16
 wait_on_run impl_1
 
 # generate xsa
