@@ -345,14 +345,12 @@ screen and (min-width: 1201px) {
         margin-left: 5px;
         margin-right: 5px;
     }
-
     img.logoimg {
         display: block;
         width: 100%;
         margin-left: auto;
         margin-right: auto;
     }
-
     section.content {
         font-size: medium;
         margin-top: 100px;
@@ -506,48 +504,6 @@ screen and (min-width: 769px) and (max-width: 1200px) {
         width: 100%;
         margin-left: auto;
         margin-right: auto;
-    }
-    .mobi{
-        display: none;
-    }
-}
-
-    .enlarge:hover{
-        color: #b6165b;
-    }
-    .caption{
-        text-align: center;
-    }
-    .wrapper {
-        width: 100%;
-        min-height: 100vh;
-    }
-    .otherheading,
-    .icon,
-    input {
-        display: none
-    }
-    .section1 {
-        width: 1000px;
-        float: right;
-        padding-bottom: 50px;
-        text-align: center;
-    }
-    .logo{
-        width: 100%;
-    }
-
-
-
-@media print,
-screen and (min-width: 769px) and (max-width: 1200px) {
-    p,
-    ul,
-    ol,
-    table,
-    dl {
-        margin-left: 5px;
-        margin-right: 5px;
     }
     .mobi{
         display: none;
