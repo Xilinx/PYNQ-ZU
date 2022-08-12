@@ -178,7 +178,7 @@
 	status = "okay";
 	dr_mode = "peripheral";
 	phy-names = "usb3-phy";
-	phys = <&lane2 4 0 0 26000000>;
+	/* phys = <&lane2 4 0 0 26000000>; */
 	maximum-speed = "super-speed";
 };
 
@@ -190,7 +190,7 @@
 	status = "okay";
 	dr_mode = "host";
 	phy-names = "usb3-phy";
-	phys = <&lane3 4 1 0 26000000>;
+	/* phys = <&lane3 4 1 0 26000000>; */
 	maximum-speed = "super-speed";
 };
 
