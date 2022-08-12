@@ -6,5 +6,5 @@ BSP_Pynq-ZU :=
 BITSTREAM_Pynq-ZU := base/base.bit
 
 STAGE4_PACKAGES_Pynq-ZU := pynq pynqmb_grove usbgadget usb-eth0 boot_leds
-STAGE4_PACKAGES_Pynq-ZU += vbus-det python_pmbus sensorconf wilc3000 xrt
-STAGE4_PACKAGES_Pynq-ZU += pynq_peripherals
+STAGE4_PACKAGES_Pynq-ZU += vbus-det python_pmbus sensorconf wilc3000
+STAGE4_PACKAGES_Pynq-ZU += xrt_zocl pynq_peripherals pynq_selftest
