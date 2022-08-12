@@ -3,5 +3,5 @@
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
-SRC_URI:append = "file://platform-top.h"
-SRC_URI += "file://bsp.cfg"
+SRC_URI:append = " file://platform-top.h"
+SRC_URI += " file://bsp.cfg"
