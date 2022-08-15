@@ -81,6 +81,30 @@
 			gpio-key,wakeup;
 		};
 	};
+
+	refclk4:psgtr_dp_clock {
+		compatible = "fixed-clock";
+		#clock-cells = <0x00>;
+		clock-frequency = <27000000>;
+	};
+
+	refclk3:psgtr_usb_clock {
+		compatible = "fixed-clock";
+		#clock-cells = <0x00>;
+		clock-frequency = <26000000>;
+	};
+
+	refclk2:psgtr_sata_clock {
+		compatible = "fixed-clock";
+		#clock-cells = <0x00>;
+		clock-frequency = <125000000>;
+	};
+
+	refclk1:psgtr_pcie_clock {
+		compatible = "fixed-clock";
+		#clock-cells = <0x00>;
+		clock-frequency = <150000000>;
+	};
 };
 
 &i2c1 {
@@ -179,7 +203,7 @@
 	status = "okay";
 	dr_mode = "peripheral";
 	phy-names = "usb3-phy";
-	phys = <&psgtr 0 PHY_TYPE_USB3 0 26000000>;
+	phys = <&psgtr 0 PHY_TYPE_USB3 0 0x2>;
 	maximum-speed = "super-speed";
 };
 
@@ -191,7 +215,7 @@
 	status = "okay";
 	dr_mode = "host";
 	phy-names = "usb3-phy";
-	phys = <&psgtr 0 PHY_TYPE_USB3 1 26000000>;
+	phys = <&psgtr 0 PHY_TYPE_USB3 1 0x2>;
 	maximum-speed = "super-speed";
 };
 
@@ -219,4 +243,11 @@
 			reg = <0x0>;
 			irq-gpios = <&gpio 45 0>;
 		};
+};
+
+&psgtr {
+	#clock-cells = <0x01>;
+	clocks = <&refclk1 &refclk2 &refclk3 &refclk4>;
+	/* ref clk instances used per lane */
+	clock-names = "ref0\0ref1\0ref2\0ref3";
 };
