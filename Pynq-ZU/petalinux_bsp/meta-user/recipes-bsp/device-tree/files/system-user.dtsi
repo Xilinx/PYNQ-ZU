@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 /include/ "system-conf.dtsi"
+#include <dt-bindings/phy/phy.h>
 
 / {
 	model = "TUL PYNQ-ZU RevB";
@@ -178,7 +179,7 @@
 	status = "okay";
 	dr_mode = "peripheral";
 	phy-names = "usb3-phy";
-	phys = <&psgtr 0 4 0 26000000>;
+	phys = <&psgtr 0 PHY_TYPE_USB3 0 26000000>;
 	maximum-speed = "super-speed";
 };
 
@@ -190,7 +191,7 @@
 	status = "okay";
 	dr_mode = "host";
 	phy-names = "usb3-phy";
-	phys = <&psgtr 0 4 1 26000000>;
+	phys = <&psgtr 0 PHY_TYPE_USB3 1 26000000>;
 	maximum-speed = "super-speed";
 };
 
