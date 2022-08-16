@@ -24,6 +24,3 @@ check_timing:
 
 clean:
 	rm -rf $(overlay_name) *.jou *.log NA .Xil *.zip *.str
-
-distclean: clean
-	rm -rf ip/

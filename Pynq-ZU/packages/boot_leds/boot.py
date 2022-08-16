@@ -27,7 +27,7 @@
 #   OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #   ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#!/bin/env python3.8
+#!/bin/env python3.10
 
 from time import sleep
 from pynq.overlays.base import BaseOverlay

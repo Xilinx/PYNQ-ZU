@@ -5,11 +5,11 @@
 SUMMARY = "Recipe for building an external wilc Linux kernel module"
 SECTION = "PETALINUX/modules"
 LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
+LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0-only;md5=801f80980d171dd6425610833a22dbe6"
 
 inherit module
 
-SRC_URI = "git://github.com/linux4wilc/driver;protocol=http;branch=${BRANCH}"
+SRC_URI:append = " git://github.com/linux4wilc/driver;protocol=http;branch=${BRANCH}"
 SRC_URI += " file://0001-wilc-pynqzu.patch"
 
 # Tag: wilc_linux_15_3_1

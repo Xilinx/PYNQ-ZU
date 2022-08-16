@@ -7,7 +7,7 @@ set -e
 
 script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-pynq_branch=image_v2.6.0
+pynq_branch=image_v2.8
 pynq_repo=https://github.com/Xilinx/PYNQ.git
 common_path="standalone_domain/bsp"
 
