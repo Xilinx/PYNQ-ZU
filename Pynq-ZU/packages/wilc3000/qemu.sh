@@ -10,7 +10,7 @@ set -x
 cd /wilc_bld
 git clone https://github.com/linux4wilc/firmware
 cd firmware
-git checkout tags/wilc_linux_15_3_1
+git checkout tags/wilc_linux_15_6
 cp /wilc_bld/firmware/wilc3000_wifi_firmware.bin /lib/firmware/mchp/
 cp /wilc_bld/firmware/wilc3000_ble_firmware.bin /lib/firmware/mchp/
 cd /
