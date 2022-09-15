@@ -202,7 +202,10 @@
 	dr_mode = "peripheral";
 	label = "USB Gadget";
 	maximum-speed = "super-speed";
+	snps,usb2-lpm-disable;
 	snps,usb3_lpm_capable;
+	snps,dis_u2_susphy_quirk;
+	snps,dis_u3_susphy_quirk;
 };
 
 &usb1 {
@@ -217,7 +220,10 @@
 	dr_mode = "host";
 	label = "USB Hub";
 	maximum-speed = "super-speed";
+	snps,usb2-lpm-disable;
 	snps,usb3_lpm_capable;
+	snps,dis_u2_susphy_quirk;
+	snps,dis_u3_susphy_quirk;
 };
 
 &sdhci0 {
