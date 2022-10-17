@@ -32,3 +32,5 @@ Once your board is up and running, go to the [PYNQ-ZU Overlays](./overlays.md) p
 
 For more information on what you can do with PYNQ, see the [PYNQ community](http://www.pynq.io/community.html) pages which showcase example PYNQ designs. You can try to port existing designs to your board, or check for any overlays that support the PYNQ-ZU. 
 
+---------------------------------------
+<p class="copyright">Copyright&copy; 2022 Advanced Micro Devices</p>

@@ -70,3 +70,6 @@ Peripherals are connected to PS and PL as follows:
 * CSI
 * XADC
 * 4x Switches, 4x User pushbuttons, 4x LEDs, 2x RGB LEDs   
+
+---------------------------------------
+<p class="copyright">Copyright&copy; 2022 Advanced Micro Devices</p>

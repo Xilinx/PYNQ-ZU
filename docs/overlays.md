@@ -134,3 +134,6 @@ source ./build_bitstream.tcl
 You can now review the block diagram.
 
 Remember the precompiled bitstream is already loaded on your board, so you do not need to rebuild the bitstream unless you have changed something in the design. 
+
+---------------------------------------
+<p class="copyright">Copyright&copy; 2022 Advanced Micro Devices</p>

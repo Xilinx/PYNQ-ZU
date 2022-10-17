@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ site.lang | default: " en-US " }}">
+<html lang="{{ site.lang | default: "en-US" }}">
 
 <head>
     <meta charset="utf-8">
@@ -17,7 +17,7 @@
 <body>
     <section class="pynqbanner">
       <div class="pynq_container">
-        <img class="pynq_background" src="./images/banner.png">
+        <img class="pynq_background" src="./images/banner.png" alt="">
         <div class="pynq_banner_background">
           <p class="pynq_banner_text">
             PYNQ-ZU 
@@ -29,7 +29,7 @@
 
     <nav>
         <div class="logo">
-            <a href="images/01_PYNQ-ZU.png"><center><img alt="" src="images/01_PYNQ-ZU.png" style="display: block" border="0"></center></a>
+            <a href="images/01_PYNQ-ZU.png"><img alt="" class="logoimg" src="images/01_PYNQ-ZU.png"></a>
         </div>
         <span class="mobi">
           PYNQ-ZU
@@ -39,17 +39,17 @@
         </label>
         <input type="checkbox" id="btn">
         <ul class="navbar-ul">
-            <li><label for="btn-2" class="show">Navigation </label></li>
+            <li><label class="show">Navigation </label></li>
             {% for item in site.data.navigation.docs %}
             <li class="listedpages"><a href="{{ item.url }} ">{{ item.title }}</a></li>
             {% endfor %}
 
-            <li><label for="btn-2" class="show">Documents </label></li>
+            <li><label class="show">Documents </label></li>
             {% for item in site.data.documents.docs %}
             <li class="listedpages"><a href="{{ item.url }} ">{{ item.title }}</a></li>
             {% endfor %}
 
-            <li><label for="btn-2" class="show">Downloads </label></li>
+            <li><label class="show">Downloads </label></li>
             {% for item in site.data.downloads.docs %}
             <li class="listedpages"><a href="{{ item.url }}">{{ item.title }}</a></li>
             {% endfor %}
@@ -65,12 +65,13 @@
 
             <footer>
 
-                <p href="https://github.com/Zacarhay/PYNQ-ZU" class="sometext" style="font-size: 15px; line-height: 1.4em; padding: 0px 0px 0px 0px;">
-                    <a href="https://github.com/Zacarhay/PYNQ-ZU" style="text-align:center" class="buttons github"><b>View on Github</b></a>
+                <p class="sometext" style="font-size: 15px; line-height: 1.4em; padding: 0px 0px 0px 0px;">
+                    <a href="{{ site.github.repository_url }}" style="text-align:center" class="buttons github"><b>View on Github</b></a>
                 </p>
             </footer>
 
         </div>
+    </div>
         <!--[if !IE]><script>fixScale(document);</script><![endif]-->
         {% if site.google_analytics %}
         <script>

@@ -39,5 +39,5 @@ Once the build has completed, if successful a SD card image will be available un
 
 Use Etcher or Win32DiskImager to write this image to an SD card. 
 
-------------------------------------------------------
-<p align="center">Copyright&copy; 2022 Xilinx</p>
+---------------------------------------
+<p class="copyright">Copyright&copy; 2022 Advanced Micro Devices</p>
