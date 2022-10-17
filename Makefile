@@ -4,8 +4,8 @@
 
 ROOT_PATH := $(abspath $(dir $(firstword $(MAKEFILE_LIST))))
 
-PREBUILT_IMAGE := ${ROOT_PATH}/pynq_rootfs.aarch64.tar.gz
-PREBUILT_SDIST := ${ROOT_PATH}/pynq_sdist.tar.gz
+PREBUILT_IMAGE := ${ROOT_PATH}/pynq/sdbuild/prebuilt/pynq_rootfs.aarch64.tar.gz
+PREBUILT_SDIST := ${ROOT_PATH}/pynq/sdbuild/prebuilt/pynq_sdist.tar.gz
 
 all: gitsubmodule base image
 	echo ${ROOT_PATH}
