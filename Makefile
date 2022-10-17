@@ -22,7 +22,7 @@ gitsubmodule:
 	git submodule init && git submodule update
 
 ${PREBUILT_IMAGE}:
-	wget hhttps://bit.ly/pynq_aarch64_v3 -O $@
+	wget https://bit.ly/pynq_aarch64_v3 -O $@
 	@echo "Got $@"
 
 ${PREBUILT_SDIST}:
