@@ -1,11 +1,11 @@
 #! /bin/bash
 
-# Copyright (C) 2021 Xilinx, Inc
+# Copyright (C) 2022 Xilinx, Inc
 # SPDX-License-Identifier: BSD-3-Clause
 
 target=$1
 script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-kernel=5.4.0-xilinx-v2020.2
+kernel=5.15.19-xilinx-v2022.1
 
 sudo cp $script_dir/wpa_ap.service $target/lib/systemd/system
 sudo cp -r $script_dir/wpa_ap $target/usr/local/share/

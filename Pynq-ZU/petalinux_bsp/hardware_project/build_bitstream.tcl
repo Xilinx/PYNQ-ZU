@@ -1,4 +1,5 @@
-# Copyright (C) 2021 Xilinx, Inc
+# Copyright (C) 2022 Xilinx, Inc
+
 # SPDX-License-Identifier: BSD-3-Clause
 
 set overlay_name "pynqzu"
@@ -22,7 +23,7 @@ set_property platform.design_intent.external_host "false" [current_project]
 set_property platform.design_intent.datacenter "false" [current_project]
 
 # call implement
-launch_runs impl_1 -to_step write_bitstream -jobs 4
+launch_runs impl_1 -to_step write_bitstream -jobs 16
 wait_on_run impl_1
 
 # generate xsa

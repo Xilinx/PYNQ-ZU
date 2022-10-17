@@ -2,11 +2,12 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 /include/ "system-conf.dtsi"
+#include <dt-bindings/phy/phy.h>
 
 / {
 	model = "TUL PYNQ-ZU RevB";
 
-	amba {
+	axi {
 		audio0:audio-codec-ctrl@800e0000 {
 			compatible = "generic-uio";
 			reg = <0x0 0x800e0000 0x0 0x10000>;
@@ -79,6 +80,18 @@
 			linux,code = <0x74>;
 			gpio-key,wakeup;
 		};
+	};
+
+	dp_clk: psgtr_dp_clock {
+		compatible = "fixed-clock";
+		#clock-cells = <0x00>;
+		clock-frequency = <27000000>;
+	};
+
+	usb_clk: psgtr_usb_clock {
+		compatible = "fixed-clock";
+		#clock-cells = <0x00>;
+		clock-frequency = <26000000>;
 	};
 };
 
@@ -170,28 +183,47 @@
 	};
 };
 
+&psgtr {
+	/* usb3, dp */
+	#clock-cells = <0x01>;
+	clocks = <&usb_clk>, <&dp_clk>;
+	clock-names = "ref0", "ref1";
+};
+
 &usb0 {
+	/* USB Gadget*/
 	status = "okay";
+	phys = <&psgtr 2 PHY_TYPE_USB3 0 0>;
+	phy-names = "usb3-phy";
 };
 
 &dwc3_0 {
 	status = "okay";
 	dr_mode = "peripheral";
-	phy-names = "usb3-phy";
-	phys = <&lane2 4 0 0 26000000>;
+	label = "USB Gadget";
 	maximum-speed = "super-speed";
+	snps,usb2-lpm-disable;
+	snps,usb3_lpm_capable;
+	snps,dis_u2_susphy_quirk;
+	snps,dis_u3_susphy_quirk;
 };
 
 &usb1 {
+	// USB Hub
 	status = "okay";
+	phys = <&psgtr 3 PHY_TYPE_USB3 1 0>;
+	phy-names = "usb3-phy";
 };
 
 &dwc3_1 {
 	status = "okay";
 	dr_mode = "host";
-	phy-names = "usb3-phy";
-	phys = <&lane3 4 1 0 26000000>;
+	label = "USB Hub";
 	maximum-speed = "super-speed";
+	snps,usb2-lpm-disable;
+	snps,usb3_lpm_capable;
+	snps,dis_u2_susphy_quirk;
+	snps,dis_u3_susphy_quirk;
 };
 
 &sdhci0 {
