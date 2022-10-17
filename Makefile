@@ -4,8 +4,8 @@
 
 ROOT_PATH := $(abspath $(dir $(firstword $(MAKEFILE_LIST))))
 
-PREBUILT_IMAGE := ${ROOT_PATH}/aarch64_prebuilt_image_3.0.0.tar.gz
-PREBUILT_SDIST := ${ROOT_PATH}/pynq-3.0.0.tar.gz
+PREBUILT_IMAGE := ${ROOT_PATH}/pynq_rootfs.aarch64.tar.gz
+PREBUILT_SDIST := ${ROOT_PATH}/pynq_sdist.tar.gz
 
 all: gitsubmodule base image
 	echo ${ROOT_PATH}
@@ -22,15 +22,12 @@ gitsubmodule:
 	git submodule init && git submodule update
 
 ${PREBUILT_IMAGE}:
-	# TODO update link
-	#wget https://bit.ly/pynq_aarch64_3_0 -O $@
+	wget hhttps://bit.ly/pynq_aarch64_v3 -O $@
 	@echo "Got $@"
 
 ${PREBUILT_SDIST}:
-	# TODO update link
-	#wget https://github.com/Xilinx/PYNQ/releases/download/v2.7.0/pynq-2.7.0.tar.gz -O $@
+	wget https://github.com/Xilinx/PYNQ/releases/download/v3.0.0/pynq-3.0.0.tar.gz -O $@
 	@echo "Got $@"
 
 cleanbuild:
 	sudo make -C pynq/sdbuild/ clean
-	cd Pynq-ZU/packages/ && rm -rf pynqmb_grove/pynq/lib/gc/bsp_iop_grove/ pynqmb_grove/pynq/lib/rpi/ pynqmb_grove/pynq_git/
