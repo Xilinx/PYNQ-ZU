@@ -23,10 +23,11 @@ gitsubmodule:
 
 ${PREBUILT_IMAGE}:
 	wget hhttps://bit.ly/pynq_aarch64_v3 -O $@
+	@echo "Got $@"
 
 ${PREBUILT_SDIST}:
 	wget https://github.com/Xilinx/PYNQ/releases/download/v3.0.0/pynq-3.0.0.tar.gz -O $@
+	@echo "Got $@"
 
 cleanbuild:
 	sudo make -C pynq/sdbuild/ clean
-	cd Pynq-ZU/packages/ && rm -rf pynqmb_grove/pynq/lib/gc/bsp_iop_grove/ pynqmb_grove/pynq/lib/rpi/ pynqmb_grove/pynq_git/
