@@ -2,7 +2,7 @@ docs_list_title: downloads
 docs:
 
 - title: PYNQ-ZU image
-  url: http://www.pynq.io/board.html
+  url: http://www.pynq.io/boards.html
   
 - title: PYNQ-ZU board files (zip)
   url: https://github.com/Xilinx/XilinxBoardStore/tree/master/boards/TUL/pynqzu/1.1
