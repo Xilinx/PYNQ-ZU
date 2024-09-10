@@ -27,7 +27,7 @@ You can watch the getting started video guide, or follow the instructions below.
 
 ### Prepare a Micro SD card
 
-* Download the [PYNQ-ZU v2.7 PYNQ image](http://www.pynq.io/board.html) and write the image to a Micro SD card
+* Download the [PYNQ-ZU v3.0.1 PYNQ image](http://www.pynq.io/boards.html) and write the image to a Micro SD card
 
 ### Setup the board
 
@@ -69,7 +69,7 @@ This should bring you to the Jupyter home area where you can start to explore yo
  	![](./images/jupyter_home.png)
 
 ---------------------------------------
-<p class="copyright">Copyright&copy; 2022 Advanced Micro Devices</p>
+<p class="copyright">Copyright&copy; 2022-2024 Advanced Micro Devices</p>
 
 
 
