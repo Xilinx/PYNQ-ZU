@@ -1,5 +1,5 @@
 ###############################################################################
- #  Copyright (c) 2020-2021, Xilinx, Inc.
+ #  Copyright (c) 2020-2025, Xilinx, Inc.
  #  All rights reserved.
  #
  #  Redistribution and use in source and binary forms, with or without
@@ -104,7 +104,7 @@ set_param board.repoPaths [get_property LOCAL_ROOT_DIR [xhub::get_xstores xilinx
 set board [get_board_parts "*:pynqzu:*" -latest_file_version]
 if { ${board} eq "" } {
   xhub::refresh_catalog [xhub::get_xstores xilinx_board_store]
-  xhub::install [xhub::get_xitems "tul.com.tw:pynqzu:pynqzu:1.1"]
+  xhub::install [xhub::get_xitems "tul.com.tw:xilinx_board_store:pynqzu:1.1"]
 }
 
 ################################################################
