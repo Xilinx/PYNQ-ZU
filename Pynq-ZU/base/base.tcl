@@ -1,5 +1,5 @@
 ###############################################################################
- #  Copyright (c) 2020-2021, Xilinx, Inc.
+ #  Copyright (c) 2020-2025, Xilinx, Inc.
  #  All rights reserved.
  #
  #  Redistribution and use in source and binary forms, with or without
@@ -57,8 +57,9 @@
  #
  # 2.70 mr    Update to Vivado 2020.2
  #
-# 3.00 mr     Update to Vivado 2020.2
+ # 3.00 mr     Update to Vivado 2022.1
  #
+ # 3.10 mr     Update to Vivado 2024.1
  #
  # </pre>
  #
@@ -85,7 +86,7 @@ set script_folder [_tcl::get_script_folder]
 ################################################################
 # Check if script is running in correct Vivado version.
 ################################################################
-set scripts_vivado_version 2022.1
+set scripts_vivado_version 2024.1
 set current_vivado_version [version -short]
 
 if { [string first $scripts_vivado_version $current_vivado_version] == -1 } {
@@ -102,8 +103,8 @@ set_param board.repoPaths [get_property LOCAL_ROOT_DIR [xhub::get_xstores xilinx
 
 set board [get_board_parts "*:pynqzu:*" -latest_file_version]
 if { ${board} eq "" } {
-  xhub::refresh_catalog [xhub::get_xstores xilinx_board_store]
-  xhub::install [xhub::get_xitems "tul.com.tw:pynqzu:pynqzu:1.1"]
+    xhub::refresh_catalog [xhub::get_xstores xilinx_board_store]
+    xhub::install [xhub::get_xitems "tul.com.tw:xilinx_board_store:pynqzu:*"]
 }
 
 ################################################################
@@ -217,7 +218,7 @@ xilinx.com:ip:util_ds_buf:2.2\
 xilinx.com:ip:xlslice:1.0\
 xilinx.com:ip:mdm:3.2\
 xilinx.com:ip:proc_sys_reset:5.0\
-xilinx.com:ip:zynq_ultra_ps_e:3.4\
+xilinx.com:ip:zynq_ultra_ps_e:3.5\
 xilinx.com:ip:dfx_axi_shutdown_manager:1.0\
 xilinx.com:ip:system_management_wiz:1.3\
 xilinx.com:user:dff_en_reset_vector:1.0\
@@ -232,7 +233,7 @@ xilinx.com:ip:axis_register_slice:1.1\
 xilinx.com:ip:axis_subset_converter:1.1\
 xilinx.com:ip:v_demosaic:1.1\
 xilinx.com:ip:v_gamma_lut:1.1\
-xilinx.com:ip:mipi_csi2_rx_subsystem:5.1\
+xilinx.com:ip:mipi_csi2_rx_subsystem:6.0\
 xilinx.com:ip:v_proc_ss:2.3\
 xilinx.com:ip:axi_dma:7.1\
 xilinx.com:ip:axis_data_fifo:2.0\
@@ -1937,7 +1938,7 @@ proc create_hier_cell_mipi { parentCell nameHier } {
  ] $gpio_ip_reset
 
   # Create instance: mipi_csi2_rx_subsyst, and set properties
-  set mipi_csi2_rx_subsyst [ create_bd_cell -type ip -vlnv xilinx.com:ip:mipi_csi2_rx_subsystem:5.1 mipi_csi2_rx_subsyst ]
+  set mipi_csi2_rx_subsyst [ create_bd_cell -type ip -vlnv xilinx.com:ip:mipi_csi2_rx_subsystem:6.0 mipi_csi2_rx_subsyst ]
   set_property -dict [ list \
    CONFIG.CLK_LANE_IO_LOC {D7} \
    CONFIG.CLK_LANE_IO_LOC_NAME {IO_L13P_T2L_N0_GC_QBC_66} \
@@ -3256,7 +3257,7 @@ proc create_root_design { parentCell } {
   set proc_sys_reset_3 [ create_bd_cell -type ip -vlnv xilinx.com:ip:proc_sys_reset:5.0 proc_sys_reset_3 ]
 
   # Create instance: ps_e_0, and set properties
-  set ps_e_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:zynq_ultra_ps_e:3.4 ps_e_0 ]
+  set ps_e_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:zynq_ultra_ps_e:3.5 ps_e_0 ]
   set_property -dict [ list \
    CONFIG.PSU_BANK_0_IO_STANDARD {LVCMOS18} \
    CONFIG.PSU_BANK_1_IO_STANDARD {LVCMOS33} \
@@ -4302,12 +4303,13 @@ proc create_root_design { parentCell } {
   current_bd_instance $oldCurInst
 
   # Create PFM attributes
-  set_property PFM_NAME {xilinx.com:xd:${overlay_name}:1.0} [get_files [current_bd_design].bd]
+  global overlay_name
+  set pfm_name "xilinx.com:xd:${overlay_name}:1.0"
+  set_property PFM_NAME ${pfm_name} [get_files [current_bd_design].bd]
   set_property PFM.CLOCK {  pl_clk0 {id "0" is_default "true"  proc_sys_reset "proc_sys_reset_0" status "fixed"}  pl_clk1 {id "1" is_default "false"  proc_sys_reset "proc_sys_reset_1" status "fixed"}  pl_clk2 {id "2" is_default "false"  proc_sys_reset "proc_sys_reset_2" status "fixed"}  pl_clk3 {id "3" is_default "false"  proc_sys_reset "proc_sys_reset_3" status "fixed"}  } [get_bd_cells /ps_e_0]
-  set_property PFM.AXI_PORT {  M_AXI_HPM0_FPD {memport "M_AXI_GP"}  M_AXI_HPM0_LPD {memport "M_AXI_GP"}  S_AXI_HPC0_FPD {memport "S_AXI_HPC"}  S_AXI_HPC1_FPD {memport "S_AXI_HPC"}  S_AXI_HP0_FPD {memport "S_AXI_HP"}  S_AXI_HP1_FPD {memport "S_AXI_HP"}  S_AXI_HP2_FPD {memport "S_AXI_HP"}  S_AXI_HP3_FPD {memport "S_AXI_HP"}  
-    S_AXI_LPD {memport "S_AXI_HP"}  } [get_bd_cells /ps_e_0]
+  #set_property PFM.AXI_PORT {  M_AXI_HPM0_FPD {memport "M_AXI_GP"}  M_AXI_HPM0_LPD {memport "M_AXI_GP"}  S_AXI_HPC0_FPD {memport "S_AXI_HPC"}  S_AXI_HPC1_FPD {memport "S_AXI_HPC"}  S_AXI_HP0_FPD {memport "S_AXI_HP"}  S_AXI_HP1_FPD {memport "S_AXI_HP"}  S_AXI_HP2_FPD {memport "S_AXI_HP"}  S_AXI_HP3_FPD {memport "S_AXI_HP"}  S_AXI_LPD {memport "S_AXI_HP"}  } [get_bd_cells /ps_e_0]
+  set_property PFM.AXI_PORT {M_AXI_HPM1_FPD {memport "M_AXI_GP" sptag "" memory "" is_range "false"} S_AXI_HPC0_FPD {memport "S_AXI_HPC" sptag "" memory "" is_range "false"} S_AXI_HPC1_FPD {memport "S_AXI_HPC" sptag "" memory "" is_range "false"}} [get_bd_cells /ps_e_0]
   set_property PFM.IRQ {In1 {} In2 {} In3 {} In4 {} In5 {} In6 {} In7 {}} [get_bd_cells /xlconcat_0]
-
 
   validate_bd_design
   save_bd_design

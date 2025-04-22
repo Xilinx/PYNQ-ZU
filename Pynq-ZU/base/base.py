@@ -1,4 +1,4 @@
-#   Copyright (c) 2020, Xilinx, Inc.
+#   Copyright (c) 2020-2025, Xilinx, Inc.
 #   All rights reserved.
 #
 #   Redistribution and use in source and binary forms, with or without
@@ -83,7 +83,7 @@ class BaseOverlay(pynq.Overlay):
             self.trace_pmod1 = TraceAnalyzer(
                 self.trace_analyzer_pmod1.description['ip'],
                 PYNQZU_PMODB_SPECIFICATION)
-                
+
         pynq.lib.pynqmicroblaze.bsp.add_module_path(
             '/pynq/lib/pynqmicroblaze/grove_modules')
 
@@ -108,7 +108,7 @@ class BaseOverlay(pynq.Overlay):
         dp159 = DP159(self.HDMI_CTL_axi_iic, 0x5C)
         si = SI_5324C(self.HDMI_CTL_axi_iic, 0x68)
         self.video.hdmi_out.frontend.clocks = [dp159, si]
-        if((self.hdmi_tx_control.read(0)) == 0):
+        if self.hdmi_tx_control.read(0) == 0:
             self.hdmi_tx_control.write(0, 1)
 
     def _check_syzygy_vio(self):
