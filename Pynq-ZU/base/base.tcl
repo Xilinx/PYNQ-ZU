@@ -4302,6 +4302,12 @@ proc create_root_design { parentCell } {
   # Restore current instance
   current_bd_instance $oldCurInst
 
+  # Disable MicroBlaze classic conversion to MicroBlaze-V
+  set_property CONFIG.C_ENABLE_CONVERSION {0} [get_bd_cells iop_pmod1/mb]
+  set_property CONFIG.C_ENABLE_CONVERSION {0} [get_bd_cells iop_rpi/mb]
+  set_property CONFIG.C_ENABLE_CONVERSION {0} [get_bd_cells iop_grove/mb]
+  set_property CONFIG.C_ENABLE_CONVERSION {0} [get_bd_cells iop_pmod0/mb]
+
   # Create PFM attributes
   global overlay_name
   set pfm_name "xilinx.com:xd:${overlay_name}:1.0"
