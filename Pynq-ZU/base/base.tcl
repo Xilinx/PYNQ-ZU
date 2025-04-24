@@ -521,6 +521,8 @@ proc create_hier_cell_hdmi_out { parentCell nameHier } {
   # Create instance: pixel_reorder, and set properties
   set pixel_reorder [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_subset_converter:1.1 pixel_reorder ]
   set_property -dict [ list \
+   CONFIG.M_TUSER_WIDTH {1} \
+   CONFIG.S_TUSER_WIDTH {1} \
    CONFIG.M_TDATA_NUM_BYTES {6} \
    CONFIG.S_TDATA_NUM_BYTES {6} \
    CONFIG.TDATA_REMAP {tdata[47:40],tdata[31:24],tdata[39:32],tdata[23:16],tdata[7:0],tdata[15:8]} \
@@ -531,6 +533,9 @@ proc create_hier_cell_hdmi_out { parentCell nameHier } {
 
   # Create instance: tx_video_axis_reg_slice, and set properties
   set tx_video_axis_reg_slice [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_register_slice:1.1 tx_video_axis_reg_slice ]
+  set_property -dict [ list \
+    CONFIG.TUSER_WIDTH {1} \
+] $tx_video_axis_reg_slice
 
   # Create interface connections
   connect_bd_intf_net -intf_net axi_interconnect_M07_AXI [get_bd_intf_pins s_axi_control] [get_bd_intf_pins color_convert/s_axi_control]
@@ -665,11 +670,16 @@ proc create_hier_cell_hdmi_in { parentCell nameHier } {
   set_property -dict [ list \
    CONFIG.M_TDATA_NUM_BYTES {6} \
    CONFIG.S_TDATA_NUM_BYTES {6} \
+   CONFIG.S_TUSER_WIDTH.VALUE_SRC USER \
+   CONFIG.M_TUSER_WIDTH.VALUE_SRC USER \
    CONFIG.TDATA_REMAP {tdata[47:40],tdata[31:24],tdata[39:32],tdata[23:16],tdata[7:0],tdata[15:8]} \
  ] $pixel_reorder
 
   # Create instance: rx_video_axis_reg_slice, and set properties
   set rx_video_axis_reg_slice [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_register_slice:1.1 rx_video_axis_reg_slice ]
+  set_property -dict [ list \
+    CONFIG.TUSER_WIDTH {1} \
+] $rx_video_axis_reg_slice
 
   # Create interface connections
   connect_bd_intf_net -intf_net axi_interconnect_M08_AXI [get_bd_intf_pins s_axi_control] [get_bd_intf_pins color_convert/s_axi_control]
