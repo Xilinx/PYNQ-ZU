@@ -14,6 +14,7 @@ Retrieve the Pynq-ZU board git into a NEW directory.
 
 ```shell
 git clone https://github.com/Xilinx/PYNQ-ZU.git <LOCAL_PYNQ-ZU_REPO>
+cd <LOCAL_PYNQ-ZU_REPO> && git submodule init && git submodule update
 ```
 
 ### Build SD Image
