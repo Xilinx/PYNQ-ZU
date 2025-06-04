@@ -12,9 +12,9 @@ inherit module
 SRC_URI:append = " git://github.com/linux4sam/linux-at91.git;protocol=git;branch=${BRANCH};subpath=drivers/net/wireless/microchip/wilc1000"
 SRC_URI += "file://0001-wilc-pynqzu.patch"
 
-# Tag: linux4microchip+sam9x7-2022.07
-SRCREV = "1426a1e20ed37afbdf33851941388d1065aafaff"
-BRANCH = "linux-5.15-mchp+sam9x7"
+# linux-6.1-mchp branch from Apr 16, 2024
+SRCREV = "99b20cea90ff1a05163da777cb95b0dae2016ef1"
+BRANCH = "linux-6.1-mchp"
 
 DEPENDS += "virtual/kernel"
 
