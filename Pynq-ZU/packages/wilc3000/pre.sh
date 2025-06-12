@@ -14,4 +14,4 @@ sudo mkdir -p $target/lib/firmware/mchp
 cd $BUILD_ROOT/${PYNQ_BOARD}/petalinux_project
 petalinux-build -c wilc
 sudo mkdir -p $target/lib/modules/$kernel/extra
-sudo cp -rf build/tmp/sysroots-components/*/wilc/lib/modules/$kernel/extra/wilc-sdio.ko $target/lib/modules/$kernel/extra/
+sudo cp -rf build/tmp/sysroots-components/*/wilc/lib/modules/$kernel*/updates/wilc-sdio.ko $target/lib/modules/$kernel/extra/
