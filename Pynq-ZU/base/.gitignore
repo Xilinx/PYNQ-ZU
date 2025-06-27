@@ -1,2 +1,5 @@
 base/
 ip/
+*.bit
+*.hwh
+*.xsa
