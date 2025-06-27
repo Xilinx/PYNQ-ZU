@@ -11,7 +11,7 @@ all: block_design bitstream check_timing
 
 hls_ip:
 	#git submodule init && git submodule update
-	vivado -mode batch -source build_ip.tcl -notrace
+	cd ../../pynq/boards/ZCU104/base/ && vivado -mode batch -source build_ip.tcl -notrace
 
 block_design: hls_ip
 	vivado -mode batch -source $(overlay_name).tcl -notrace
