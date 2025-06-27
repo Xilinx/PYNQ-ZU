@@ -15,7 +15,7 @@ cd ${BUILD_ROOT}/${PYNQ_BOARD}/petalinux_project
 petalinux-build -c wilc
 
 src_dir="build/tmp/sysroots-components/*/wilc/lib/modules/"
-kernel_version=$(ls {src_dir})
+kernel_version=$(ls ${src_dir})
 
 sudo mkdir -p ${target}/lib/modules/${kernel_version}/extra
 sudo cp -rf ${src_dir}/*/updates/wilc-sdio.ko ${target}/lib/modules/${kernel_version}/extra/
