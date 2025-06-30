@@ -60,7 +60,7 @@ class BaseOverlay(pynq.Overlay):
             self.leds = self.gpio_leds.channel1
             self.leds.setdirection('out')
             self.leds.setlength(4)
-            self.rgbleds = [pynq.lib.RGBLED(i, "rgbleds") for i in range(2)]
+            self.rgbleds = [pynq.lib.RGBLED(i, "rgb_leds") for i in range(2)]
             self.buttons = self.gpio_btns.channel1
             self.buttons.setdirection('in')
             self.buttons.setlength(4)
