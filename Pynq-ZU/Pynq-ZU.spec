@@ -4,6 +4,7 @@
 ARCH_Pynq-ZU := aarch64
 BSP_Pynq-ZU := 
 BITSTREAM_Pynq-ZU := base/base.bit
+FPGA_MANAGER_Pynq-ZU := 1
 
 STAGE4_PACKAGES_Pynq-ZU := pynq usbgadget usb-eth0 boot_leds
 STAGE4_PACKAGES_Pynq-ZU += vbus-det python_pmbus sensorconf
