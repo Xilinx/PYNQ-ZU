@@ -1,4 +1,5 @@
-#   Copyright (c) 2020-2025, Xilinx, Inc.
+#   Copyright (c) 2020-2022, Xilinx, Inc.
+#   Copyright (c) 2022-2025, Advanced Micro Devices, Inc.
 #   All rights reserved.
 #
 #   Redistribution and use in source and binary forms, with or without
@@ -28,15 +29,11 @@
 #   ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-__author__ = "Giuseppe Natale"
-__copyright__ = "Copyright 2020, Xilinx"
-__email__ = "pynq_support@xilinx.com"
-
-
-import pynq
-import pynq.lib
+import os
 import time
 import warnings
+import pynq
+import pynq.lib
 from math import isclose
 from pynq.lib.logictools import TraceAnalyzer
 from pynq.lib.video.clocks import *
@@ -58,12 +55,12 @@ class BaseOverlay(pynq.Overlay):
             self.RPI = self.iop_rpi.mb_info
 
             self.audio = self.audio_codec_ctrl_0
-            self.audio.configure(iic_index=5)
+            #self.audio.configure(iic_index=5)
 
             self.leds = self.gpio_leds.channel1
             self.leds.setdirection('out')
             self.leds.setlength(4)
-            self.rgbleds = [pynq.lib.RGBLED(i, "rgbleds") for i in range(2)]
+            self.rgbleds = [pynq.lib.RGBLED(i, "rgb_leds") for i in range(2)]
             self.buttons = self.gpio_btns.channel1
             self.buttons.setdirection('in')
             self.buttons.setlength(4)
@@ -83,9 +80,9 @@ class BaseOverlay(pynq.Overlay):
             self.trace_pmod1 = TraceAnalyzer(
                 self.trace_analyzer_pmod1.description['ip'],
                 PYNQZU_PMODB_SPECIFICATION)
-
-        pynq.lib.pynqmicroblaze.bsp.add_module_path(
-            '/pynq/lib/pynqmicroblaze/grove_modules')
+        grove_dir = '/pynq/lib/pynqmicroblaze/grove_modules'
+        if os.path.exists(grove_dir):
+            pynq.lib.pynqmicroblaze.bsp.add_module_path(grove_dir)
 
     def download(self):
         super().download()
