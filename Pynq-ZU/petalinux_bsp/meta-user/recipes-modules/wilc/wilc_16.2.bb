@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0-only;md5=801f80980d171d
 
 inherit module
 
-SRC_URI:append = " git://github.com/linux4sam/linux-at91.git;protocol=git;branch=${BRANCH};subpath=drivers/net/wireless/microchip/wilc1000"
+SRC_URI:append = " git://github.com/linux4sam/linux-at91.git;protocol=https;branch=${BRANCH};subpath=drivers/net/wireless/microchip/wilc1000"
 SRC_URI += "file://0001-wilc-pynqzu.patch"
 
 # linux-6.1-mchp branch from Apr 16, 2024

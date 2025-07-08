@@ -7,8 +7,8 @@ set current_dir [pwd]
 set pynq_hls_ip "./../../pynq/boards/ip/hls"
 
 # get list of IP from folder names
-set ip {color_convert_2 pixel_pack_2 pixel_unpack_2 trace_cntrl_32 trace_cntrl_64 }
-set ip_version {"1.0" "1.0" "1.0" "1.4" "1.4"}
+set ip {trace_cntrl_32 trace_cntrl_64}
+set ip_version {"1.4" "1.4"}
 # Check and build each IP
 foreach item $ip version $ip_version {
    if {[catch { glob -directory ${pynq_hls_ip}/${item}/${item}_zu_solution/impl/ip/ *.zip} zip_file]} {
