@@ -1992,16 +1992,16 @@ proc create_hier_cell_mipi { parentCell nameHier } {
   # Create instance: axis_channel_swap, and set properties
   set axis_channel_swap [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_subset_converter:1.1 axis_channel_swap ]
   set_property -dict [ list \
-   CONFIG.M_HAS_TKEEP {0} \
+   CONFIG.M_HAS_TKEEP {1} \
+   CONFIG.M_HAS_TSTRB {1} \
    CONFIG.M_HAS_TLAST {1} \
    CONFIG.M_HAS_TREADY {1} \
-   CONFIG.M_HAS_TSTRB {0} \
    CONFIG.M_TDATA_NUM_BYTES {6} \
    CONFIG.M_TUSER_WIDTH {1} \
-   CONFIG.S_HAS_TKEEP {0} \
+   CONFIG.S_HAS_TKEEP {1} \
    CONFIG.S_HAS_TLAST {1} \
    CONFIG.S_HAS_TREADY {1} \
-   CONFIG.S_HAS_TSTRB {0} \
+   CONFIG.S_HAS_TSTRB {1} \
    CONFIG.S_TDATA_NUM_BYTES {6} \
    CONFIG.S_TUSER_WIDTH {1} \
    CONFIG.TDATA_REMAP {tdata[39:24], tdata[47:40], tdata[15:0], tdata[23:16]} \
