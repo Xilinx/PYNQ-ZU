@@ -20,7 +20,7 @@ ${ROOT_PATH}/Pynq-ZU/base/base.bit:
 
 gitsubmodule:
 	@echo "Updating submodule"
-	#git submodule init && git submodule update
+	git submodule init && git submodule update
 
 ${PREBUILT_IMAGE}:
 	wget https://bit.ly/pynq_aarch64_v3 -O $@
