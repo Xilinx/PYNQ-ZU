@@ -670,11 +670,9 @@ proc create_hier_cell_hdmi_in { parentCell nameHier } {
   set pixel_reorder [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_subset_converter:1.1 pixel_reorder ]
   set_property -dict [ list \
    CONFIG.M_TUSER_WIDTH {1} \
-   CONFIG.S_TUSER_WIDTH {1} \  
+   CONFIG.S_TUSER_WIDTH {1} \
    CONFIG.M_TDATA_NUM_BYTES {6} \
    CONFIG.S_TDATA_NUM_BYTES {6} \
-   CONFIG.S_TUSER_WIDTH.VALUE_SRC USER \
-   CONFIG.M_TUSER_WIDTH.VALUE_SRC USER \
    CONFIG.TDATA_REMAP {tdata[47:40],tdata[31:24],tdata[39:32],tdata[23:16],tdata[7:0],tdata[15:8]} \
  ] $pixel_reorder
 
