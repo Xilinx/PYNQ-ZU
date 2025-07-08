@@ -10,7 +10,7 @@ all: block_design bitstream check_timing
 	@echo
 
 hls_ip:
-	#git submodule init && git submodule update
+	git submodule init && git submodule update
 	#Build PYNQ IP
 	cd ../../pynq/boards/ZCU104/base/ && vivado -mode batch -source build_ip.tcl -notrace
 	#Build local IP
