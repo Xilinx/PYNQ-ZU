@@ -4293,7 +4293,7 @@ proc create_root_design { parentCell } {
   exclude_bd_addr_seg -offset 0xFF000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces trace_analyzer_pmod1/axi_dma_0/Data_S2MM] [get_bd_addr_segs ps_e_0/SAXIGP5/HP3_LPS_OCM]
   exclude_bd_addr_seg -offset 0xFF000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces video/axi_vdma/Data_MM2S] [get_bd_addr_segs ps_e_0/SAXIGP2/HP0_LPS_OCM]
   exclude_bd_addr_seg -offset 0xFF000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces video/axi_vdma/Data_S2MM] [get_bd_addr_segs ps_e_0/SAXIGP4/HP2_LPS_OCM]
-
+  save_bd_design
 
   # Restore current instance
   current_bd_instance $oldCurInst
