@@ -2000,6 +2000,8 @@ proc create_hier_cell_mipi { parentCell nameHier } {
    CONFIG.TDATA_REMAP {tdata[39:24], tdata[47:40], tdata[15:0], tdata[23:16]} \
    CONFIG.TLAST_REMAP {tlast[0]} \
    CONFIG.TUSER_REMAP {tuser[0:0]} \
+   CONFIG.TKEEP_REMAP {6'b0} \
+   CONFIG.TSTRB_REMAP {6'b0} \
  ] $axis_channel_swap
 
   # Create instance: pixel_pack, and set properties
