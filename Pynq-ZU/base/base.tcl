@@ -1,5 +1,5 @@
 ###############################################################################
- #  Copyright (c) 2020-2021, Xilinx, Inc.
+ #  Copyright (c) 2020-2022, Xilinx, Inc.
  # Copyright (C) 2023-2025 Advanced Micro Devices, Inc.
  #  All rights reserved.
  #
@@ -62,7 +62,6 @@
  #
  # 3.10 mr     Update to Vivado 2024.1
  #
- #
  # </pre>
  #
 ###############################################################################
@@ -105,8 +104,8 @@ set_param board.repoPaths [get_property LOCAL_ROOT_DIR [xhub::get_xstores xilinx
 
 set board [get_board_parts "*:pynqzu:*" -latest_file_version]
 if { ${board} eq "" } {
-  xhub::refresh_catalog [xhub::get_xstores xilinx_board_store]
-  xhub::install [xhub::get_xitems "tul.com.tw:xilinx_board_store:pynqzu:*"]
+    xhub::refresh_catalog [xhub::get_xstores xilinx_board_store]
+    xhub::install [xhub::get_xitems "tul.com.tw:xilinx_board_store:pynqzu:*"]
 }
 
 ################################################################
@@ -3916,7 +3915,7 @@ proc create_root_design { parentCell } {
   set rgb_leds [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_gpio:2.0 rgb_leds ]
   set_property -dict [ list \
    CONFIG.C_ALL_OUTPUTS {1} \
-   CONFIG.GPIO_BOARD_INTERFACE {rgb_leds} \
+   CONFIG.GPIO_BOARD_INTERFACE {rgbleds} \
    CONFIG.USE_BOARD_FLOW {true} \
  ] $rgb_leds
 
@@ -4313,7 +4312,6 @@ proc create_root_design { parentCell } {
   #set_property PFM.AXI_PORT {  M_AXI_HPM0_FPD {memport "M_AXI_GP"}  M_AXI_HPM0_LPD {memport "M_AXI_GP"}  S_AXI_HPC0_FPD {memport "S_AXI_HPC"}  S_AXI_HPC1_FPD {memport "S_AXI_HPC"}  S_AXI_HP0_FPD {memport "S_AXI_HP"}  S_AXI_HP1_FPD {memport "S_AXI_HP"}  S_AXI_HP2_FPD {memport "S_AXI_HP"}  S_AXI_HP3_FPD {memport "S_AXI_HP"}  S_AXI_LPD {memport "S_AXI_HP"}  } [get_bd_cells /ps_e_0]
   set_property PFM.AXI_PORT {M_AXI_HPM1_FPD {memport "M_AXI_GP" sptag "" memory "" is_range "false"} S_AXI_HPC0_FPD {memport "S_AXI_HPC" sptag "" memory "" is_range "false"} S_AXI_HPC1_FPD {memport "S_AXI_HPC" sptag "" memory "" is_range "false"}} [get_bd_cells /ps_e_0]
   set_property PFM.IRQ {In1 {} In2 {} In3 {} In4 {} In5 {} In6 {} In7 {}} [get_bd_cells /xlconcat_0]
-
 
   validate_bd_design
   save_bd_design
