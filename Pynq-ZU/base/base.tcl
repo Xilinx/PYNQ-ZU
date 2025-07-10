@@ -2019,7 +2019,7 @@ proc create_hier_cell_mipi { parentCell nameHier } {
   connect_bd_intf_net -intf_net smartconnect_M03_AXI [get_bd_intf_pins smartconnect_0/M03_AXI] [get_bd_intf_pins v_proc_sys/s_axi_ctrl]
   connect_bd_intf_net -intf_net smartconnect_M04_AXI [get_bd_intf_pins smartconnect_0/M04_AXI] [get_bd_intf_pins pixel_pack/s_axi_control]
   connect_bd_intf_net -intf_net smartconnect_M05_AXI [get_bd_intf_pins smartconnect_0/M05_AXI] [get_bd_intf_pins axi_vdma/S_AXI_LITE]
-  connect_bd_intf_net -intf_net smartconnect_M05_AXI [get_bd_intf_pins smartconnect_0/M06_AXI] [get_bd_intf_pins gpio_ip_reset/S_AXI]
+  connect_bd_intf_net -intf_net smartconnect_M06_AXI [get_bd_intf_pins smartconnect_0/M06_AXI] [get_bd_intf_pins gpio_ip_reset/S_AXI]
   connect_bd_intf_net -intf_net gpio_ip_reset_GPIO2 [get_bd_intf_pins cam_gpio] [get_bd_intf_pins gpio_ip_reset/GPIO2]
   connect_bd_intf_net -intf_net axi_interconnect_M00_AXI [get_bd_intf_pins M00_AXI] [get_bd_intf_pins axi_interconnect/M00_AXI]
   connect_bd_intf_net -intf_net axi_vdma_0_M_AXI_S2MM [get_bd_intf_pins axi_interconnect/S00_AXI] [get_bd_intf_pins axi_vdma/M_AXI_S2MM]
