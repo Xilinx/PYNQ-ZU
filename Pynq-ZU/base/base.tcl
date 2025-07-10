@@ -1,6 +1,6 @@
 ###############################################################################
  #  Copyright (c) 2020-2022, Xilinx, Inc.
- # Copyright (C) 2023-2025 Advanced Micro Devices, Inc.
+ #  Copyright (C) 2023-2025 Advanced Micro Devices, Inc.
  #  All rights reserved.
  #
  #  Redistribution and use in source and binary forms, with or without
@@ -3015,7 +3015,7 @@ proc create_root_design { parentCell } {
   # Create instance: axi_interconnect, and set properties
   set axi_interconnect [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_interconnect:2.1 axi_interconnect ]
   set_property -dict [ list \
-   CONFIG.NUM_MI {27} \
+   CONFIG.NUM_MI {26} \
  ] $axi_interconnect
 
   # Create instance: axi_interconnect_0, and set properties
