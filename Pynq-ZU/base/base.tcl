@@ -2042,8 +2042,8 @@ proc create_hier_cell_mipi { parentCell nameHier } {
   connect_bd_net -net mipi_csi2_rx_subsyst_0_csirxss_csi_irq [get_bd_pins csirxss_csi_irq] [get_bd_pins mipi_csi2_rx_subsyst/csirxss_csi_irq]
   connect_bd_net -net net_zynq_us_ss_0_clk_out2 [get_bd_pins video_aclk] [get_bd_pins axi_interconnect/ACLK] [get_bd_pins axi_interconnect/M00_ACLK] [get_bd_pins axi_interconnect/S00_ACLK] [get_bd_pins axi_vdma/m_axi_mm2s_aclk] [get_bd_pins axi_vdma/m_axi_s2mm_aclk] [get_bd_pins axi_vdma/m_axis_mm2s_aclk] [get_bd_pins axi_vdma/s_axis_s2mm_aclk] [get_bd_pins axis_subset_converter/aclk] [get_bd_pins demosaic/ap_clk] [get_bd_pins gamma_lut/ap_clk] [get_bd_pins gpio_ip_reset/s_axi_aclk] [get_bd_pins mipi_csi2_rx_subsyst/video_aclk] [get_bd_pins v_proc_sys/aclk] [get_bd_pins axis_channel_swap/aclk] [get_bd_pins pixel_pack/ap_clk] [get_bd_pins pixel_pack/control] [get_bd_pins proc_sys_reset/slowest_sync_clk]
   connect_bd_net -net net_zynq_us_ss_0_dcm_locked [get_bd_pins video_aresetn] [get_bd_pins axi_interconnect/ARESETN] [get_bd_pins axi_interconnect/M00_ARESETN] [get_bd_pins axi_interconnect/S00_ARESETN] [get_bd_pins axis_subset_converter/aresetn] [get_bd_pins gpio_ip_reset/s_axi_aresetn] [get_bd_pins mipi_csi2_rx_subsyst/video_aresetn] [get_bd_pins proc_sys_reset/ext_reset_in]
-  connect_bd_net [get_bd_pins video_aresetn] [get_bd_pins axi_vdma/axi_resetn] [get_bd_pins mipi_csi2_rx_subsyst/lite_aresetn] [smartconnect_0/aclk]
-  connect_bd_net [get_bd_pins video_aclk] [get_bd_pins axi_vdma/s_axi_lite_aclk] [get_bd_pins mipi_csi2_rx_subsyst/lite_aclk] [smartconnect_0/aclk]
+  connect_bd_net [get_bd_pins video_aresetn] [get_bd_pins axi_vdma/axi_resetn] [get_bd_pins mipi_csi2_rx_subsyst/lite_aresetn] [get_bd_pins smartconnect_0/aresetn]
+  connect_bd_net [get_bd_pins video_aclk] [get_bd_pins axi_vdma/s_axi_lite_aclk] [get_bd_pins mipi_csi2_rx_subsyst/lite_aclk] [get_bd_pins smartconnect_0/aclk]
 
   # Restore current instance
   current_bd_instance $oldCurInst
