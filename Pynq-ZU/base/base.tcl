@@ -1,5 +1,6 @@
 ###############################################################################
  #  Copyright (c) 2020-2021, Xilinx, Inc.
+ # Copyright (C) 2023-2025 Advanced Micro Devices, Inc.
  #  All rights reserved.
  #
  #  Redistribution and use in source and binary forms, with or without
@@ -46,7 +47,7 @@
  #			  Changed v_proc_ss:2.1 to v_proc_ss:2.2
  # 2.00b pp	  Fixed DMA address space bug of the pmod0_trace_analyzer
  # 2.00c pp   Xilinx board store support added
- # 2.00d pp   Added Address Remapper IP to remap MB access to upper 2 GB of 
+ # 2.00d pp   Added Address Remapper IP to remap MB access to upper 2 GB of
  #            LOW_DDR
  # 2.00e pp   replaced zynq targeting trace controllers with mpsoc targeting
  #            controller
@@ -57,7 +58,9 @@
  #
  # 2.70 mr    Update to Vivado 2020.2
  #
-# 3.00 mr     Update to Vivado 2020.2
+ # 3.00 mr     Update to Vivado 2022.1
+ #
+ # 3.10 mr     Update to Vivado 2024.1
  #
  #
  # </pre>
@@ -85,7 +88,7 @@ set script_folder [_tcl::get_script_folder]
 ################################################################
 # Check if script is running in correct Vivado version.
 ################################################################
-set scripts_vivado_version 2022.1
+set scripts_vivado_version 2024.1
 set current_vivado_version [version -short]
 
 if { [string first $scripts_vivado_version $current_vivado_version] == -1 } {
@@ -103,7 +106,7 @@ set_param board.repoPaths [get_property LOCAL_ROOT_DIR [xhub::get_xstores xilinx
 set board [get_board_parts "*:pynqzu:*" -latest_file_version]
 if { ${board} eq "" } {
   xhub::refresh_catalog [xhub::get_xstores xilinx_board_store]
-  xhub::install [xhub::get_xitems "tul.com.tw:pynqzu:pynqzu:1.1"]
+  xhub::install [xhub::get_xitems "tul.com.tw:xilinx_board_store:pynqzu:*"]
 }
 
 ################################################################
@@ -168,7 +171,7 @@ if { ${design_name} eq "" } {
    set errMsg "Design <$design_name> already exists in your project, please set the variable <design_name> to another value."
    set nRet 1
 } elseif { [get_files -quiet ${design_name}.bd] ne "" } {
-   # USE CASES: 
+   # USE CASES:
    #    6) Current opened design, has components, but diff names, design_name exists in project.
    #    7) No opened design, design_name exists in project.
 
@@ -202,7 +205,7 @@ set bCheckIPsPassed 1
 ##################################################################
 set bCheckIPs 1
 if { $bCheckIPs == 1 } {
-   set list_check_ips "\ 
+   set list_check_ips "\
 xilinx.com:ip:axi_iic:2.1\
 user.org:user:address_remap:1.0\
 xilinx.com:user:audio_codec_ctrl:1.0\
@@ -217,7 +220,7 @@ xilinx.com:ip:util_ds_buf:2.2\
 xilinx.com:ip:xlslice:1.0\
 xilinx.com:ip:mdm:3.2\
 xilinx.com:ip:proc_sys_reset:5.0\
-xilinx.com:ip:zynq_ultra_ps_e:3.4\
+xilinx.com:ip:zynq_ultra_ps_e:3.5\
 xilinx.com:ip:dfx_axi_shutdown_manager:1.0\
 xilinx.com:ip:system_management_wiz:1.3\
 xilinx.com:user:dff_en_reset_vector:1.0\
@@ -232,7 +235,7 @@ xilinx.com:ip:axis_register_slice:1.1\
 xilinx.com:ip:axis_subset_converter:1.1\
 xilinx.com:ip:v_demosaic:1.1\
 xilinx.com:ip:v_gamma_lut:1.1\
-xilinx.com:ip:mipi_csi2_rx_subsystem:5.1\
+xilinx.com:ip:mipi_csi2_rx_subsystem:6.0\
 xilinx.com:ip:v_proc_ss:2.3\
 xilinx.com:ip:axi_dma:7.1\
 xilinx.com:ip:axis_data_fifo:2.0\
@@ -520,6 +523,8 @@ proc create_hier_cell_hdmi_out { parentCell nameHier } {
   # Create instance: pixel_reorder, and set properties
   set pixel_reorder [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_subset_converter:1.1 pixel_reorder ]
   set_property -dict [ list \
+   CONFIG.M_TUSER_WIDTH {1} \
+   CONFIG.S_TUSER_WIDTH {1} \
    CONFIG.M_TDATA_NUM_BYTES {6} \
    CONFIG.S_TDATA_NUM_BYTES {6} \
    CONFIG.TDATA_REMAP {tdata[47:40],tdata[31:24],tdata[39:32],tdata[23:16],tdata[7:0],tdata[15:8]} \
@@ -530,6 +535,9 @@ proc create_hier_cell_hdmi_out { parentCell nameHier } {
 
   # Create instance: tx_video_axis_reg_slice, and set properties
   set tx_video_axis_reg_slice [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_register_slice:1.1 tx_video_axis_reg_slice ]
+  set_property -dict [ list \
+    CONFIG.TUSER_WIDTH {1} \
+  ] $tx_video_axis_reg_slice
 
   # Create interface connections
   connect_bd_intf_net -intf_net axi_interconnect_M07_AXI [get_bd_intf_pins s_axi_control] [get_bd_intf_pins color_convert/s_axi_control]
@@ -662,6 +670,8 @@ proc create_hier_cell_hdmi_in { parentCell nameHier } {
   # Create instance: pixel_reorder, and set properties
   set pixel_reorder [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_subset_converter:1.1 pixel_reorder ]
   set_property -dict [ list \
+   CONFIG.M_TUSER_WIDTH {1} \
+   CONFIG.S_TUSER_WIDTH {1} \
    CONFIG.M_TDATA_NUM_BYTES {6} \
    CONFIG.S_TDATA_NUM_BYTES {6} \
    CONFIG.TDATA_REMAP {tdata[47:40],tdata[31:24],tdata[39:32],tdata[23:16],tdata[7:0],tdata[15:8]} \
@@ -669,6 +679,9 @@ proc create_hier_cell_hdmi_in { parentCell nameHier } {
 
   # Create instance: rx_video_axis_reg_slice, and set properties
   set rx_video_axis_reg_slice [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_register_slice:1.1 rx_video_axis_reg_slice ]
+  set_property -dict [ list \
+    CONFIG.TUSER_WIDTH {1} \
+  ] $rx_video_axis_reg_slice
 
   # Create interface connections
   connect_bd_intf_net -intf_net axi_interconnect_M08_AXI [get_bd_intf_pins s_axi_control] [get_bd_intf_pins color_convert/s_axi_control]
@@ -1934,7 +1947,7 @@ proc create_hier_cell_mipi { parentCell nameHier } {
  ] $gpio_ip_reset
 
   # Create instance: mipi_csi2_rx_subsyst, and set properties
-  set mipi_csi2_rx_subsyst [ create_bd_cell -type ip -vlnv xilinx.com:ip:mipi_csi2_rx_subsystem:5.1 mipi_csi2_rx_subsyst ]
+  set mipi_csi2_rx_subsyst [ create_bd_cell -type ip -vlnv xilinx.com:ip:mipi_csi2_rx_subsystem mipi_csi2_rx_subsyst ]
   set_property -dict [ list \
    CONFIG.CLK_LANE_IO_LOC {D7} \
    CONFIG.CLK_LANE_IO_LOC_NAME {IO_L13P_T2L_N0_GC_QBC_66} \
@@ -1975,16 +1988,16 @@ proc create_hier_cell_mipi { parentCell nameHier } {
   # Create instance: axis_channel_swap, and set properties
   set axis_channel_swap [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_subset_converter:1.1 axis_channel_swap ]
   set_property -dict [ list \
-   CONFIG.M_HAS_TKEEP {0} \
+   CONFIG.M_HAS_TKEEP {1} \
+   CONFIG.M_HAS_TSTRB {1} \
    CONFIG.M_HAS_TLAST {1} \
    CONFIG.M_HAS_TREADY {1} \
-   CONFIG.M_HAS_TSTRB {0} \
    CONFIG.M_TDATA_NUM_BYTES {6} \
    CONFIG.M_TUSER_WIDTH {1} \
-   CONFIG.S_HAS_TKEEP {0} \
+   CONFIG.S_HAS_TKEEP {1} \
    CONFIG.S_HAS_TLAST {1} \
    CONFIG.S_HAS_TREADY {1} \
-   CONFIG.S_HAS_TSTRB {0} \
+   CONFIG.S_HAS_TSTRB {1} \
    CONFIG.S_TDATA_NUM_BYTES {6} \
    CONFIG.S_TUSER_WIDTH {1} \
    CONFIG.TDATA_REMAP {tdata[39:24], tdata[47:40], tdata[15:0], tdata[23:16]} \
@@ -2003,7 +2016,7 @@ proc create_hier_cell_mipi { parentCell nameHier } {
 
   # Create interface connections
   connect_bd_intf_net -intf_net Conn1 [get_bd_intf_pins S_AXI_LITE] [get_bd_intf_pins smartconnect_0/S00_AXI]
-  connect_bd_intf_net -intf_net smartconnect_M00_AXI [get_bd_intf_pins smartconnect_0/M00_AXI] [get_bd_intf_pins mipi_csi2_rx_subsyst/csirxss_s_axi]  
+  connect_bd_intf_net -intf_net smartconnect_M00_AXI [get_bd_intf_pins smartconnect_0/M00_AXI] [get_bd_intf_pins mipi_csi2_rx_subsyst/csirxss_s_axi]
   connect_bd_intf_net -intf_net smartconnect_M01_AXI [get_bd_intf_pins smartconnect_0/M01_AXI] [get_bd_intf_pins demosaic/s_axi_CTRL]
   connect_bd_intf_net -intf_net smartconnect_M02_AXI [get_bd_intf_pins smartconnect_0/M02_AXI] [get_bd_intf_pins gamma_lut/s_axi_CTRL]
   connect_bd_intf_net -intf_net smartconnect_M03_AXI [get_bd_intf_pins smartconnect_0/M03_AXI] [get_bd_intf_pins v_proc_sys/s_axi_ctrl]
@@ -2938,7 +2951,7 @@ proc create_root_design { parentCell } {
 
   set push_button_4bits [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:gpio_rtl:1.0 push_button_4bits ]
 
-  set rgbleds [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:gpio_rtl:1.0 rgbleds ]
+  set rgb_leds [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:gpio_rtl:1.0 rgb_leds ]
 
 
   # Create ports
@@ -3248,7 +3261,7 @@ proc create_root_design { parentCell } {
   set proc_sys_reset_3 [ create_bd_cell -type ip -vlnv xilinx.com:ip:proc_sys_reset:5.0 proc_sys_reset_3 ]
 
   # Create instance: ps_e_0, and set properties
-  set ps_e_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:zynq_ultra_ps_e:3.4 ps_e_0 ]
+  set ps_e_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:zynq_ultra_ps_e ps_e_0 ]
   set_property -dict [ list \
    CONFIG.PSU_BANK_0_IO_STANDARD {LVCMOS18} \
    CONFIG.PSU_BANK_1_IO_STANDARD {LVCMOS33} \
@@ -3899,13 +3912,13 @@ proc create_root_design { parentCell } {
    CONFIG.NUM_MI {7} \
  ] $ps_e_0_axi_periph
 
-  # Create instance: rgbleds, and set properties
-  set rgbleds [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_gpio:2.0 rgbleds ]
+  # Create instance: rgb_leds, and set properties
+  set rgb_leds [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_gpio:2.0 rgb_leds ]
   set_property -dict [ list \
    CONFIG.C_ALL_OUTPUTS {1} \
-   CONFIG.GPIO_BOARD_INTERFACE {rgbleds} \
+   CONFIG.GPIO_BOARD_INTERFACE {rgb_leds} \
    CONFIG.USE_BOARD_FLOW {true} \
- ] $rgbleds
+ ] $rgb_leds
 
   # Create instance: rpi_buf, and set properties
   set rpi_buf [ create_bd_cell -type ip -vlnv xilinx.com:ip:util_ds_buf:2.2 rpi_buf ]
@@ -4036,7 +4049,7 @@ proc create_root_design { parentCell } {
   connect_bd_intf_net -intf_net axi_interconnect_M16_AXI [get_bd_intf_pins axi_interconnect/M16_AXI] [get_bd_intf_pins shutdown_HP0_FPD/S_AXI_CTRL]
   connect_bd_intf_net -intf_net axi_interconnect_M17_AXI [get_bd_intf_pins axi_interconnect/M17_AXI] [get_bd_intf_pins shutdown_LPD/S_AXI_CTRL]
   connect_bd_intf_net -intf_net axi_interconnect_M18_AXI [get_bd_intf_pins axi_interconnect/M18_AXI] [get_bd_intf_pins shutdown_HP2_FPD/S_AXI_CTRL]
-  connect_bd_intf_net -intf_net axi_interconnect_M19_AXI [get_bd_intf_pins axi_interconnect/M19_AXI] [get_bd_intf_pins rgbleds/S_AXI]
+  connect_bd_intf_net -intf_net axi_interconnect_M19_AXI [get_bd_intf_pins axi_interconnect/M19_AXI] [get_bd_intf_pins rgb_leds/S_AXI]
   connect_bd_intf_net -intf_net axi_interconnect_M20_AXI [get_bd_intf_pins axi_interconnect/M20_AXI] [get_bd_intf_pins iop_grove/S_AXI]
   connect_bd_intf_net -intf_net axi_interconnect_M21_AXI [get_bd_intf_pins audio_codec_ctrl_0/S_AXI] [get_bd_intf_pins axi_interconnect/M21_AXI]
   connect_bd_intf_net -intf_net axi_interconnect_M22_AXI [get_bd_intf_pins axi_interconnect/M22_AXI] [get_bd_intf_pins iop_rpi/S_AXI]
@@ -4076,7 +4089,7 @@ proc create_root_design { parentCell } {
   connect_bd_intf_net -intf_net ps_e_0_axi_periph_M04_AXI [get_bd_intf_pins ps_e_0_axi_periph/M04_AXI] [get_bd_intf_pins trace_analyzer_pmod0/s_axi_trace_cntrl]
   connect_bd_intf_net -intf_net ps_e_0_axi_periph_M05_AXI [get_bd_intf_pins ps_e_0_axi_periph/M05_AXI] [get_bd_intf_pins trace_analyzer_pmod1/s_axi_trace_cntrl]
   connect_bd_intf_net -intf_net ps_e_0_axi_periph_M06_AXI [get_bd_intf_pins ps_e_0_axi_periph/M06_AXI] [get_bd_intf_pins mipi/S_AXI_LITE]
-  connect_bd_intf_net -intf_net rgb_leds_GPIO [get_bd_intf_ports rgbleds] [get_bd_intf_pins rgb_leds/GPIO]
+  connect_bd_intf_net -intf_net rgb_leds_GPIO [get_bd_intf_ports rgb_leds] [get_bd_intf_pins rgb_leds/GPIO]
   connect_bd_intf_net -intf_net shutdown_HP0_M_AXI [get_bd_intf_pins ps_e_0/S_AXI_HP0_FPD] [get_bd_intf_pins shutdown_HP0_FPD/M_AXI]
   connect_bd_intf_net -intf_net shutdown_HP1_M_AXI [get_bd_intf_pins ps_e_0/S_AXI_HP1_FPD] [get_bd_intf_pins shutdown_HP1_FPD/M_AXI]
   connect_bd_intf_net -intf_net shutdown_HP2_M_AXI [get_bd_intf_pins ps_e_0/S_AXI_HP2_FPD] [get_bd_intf_pins shutdown_HP2_FPD/M_AXI]
@@ -4156,8 +4169,8 @@ proc create_root_design { parentCell } {
   connect_bd_net -net net_vid_phy_controller_tx_tmds_clk_p [get_bd_ports HDMI_TX_CLK_P_OUT] [get_bd_pins video/HDMI_TX_CLK_P_OUT]
   connect_bd_net -net net_zynq_us_ss_0_clk_out2 [get_bd_pins axi_interconnect/M07_ACLK] [get_bd_pins axi_interconnect/M08_ACLK] [get_bd_pins axi_interconnect/M09_ACLK] [get_bd_pins axi_interconnect/M10_ACLK] [get_bd_pins axi_interconnect/M16_ACLK] [get_bd_pins axi_interconnect/M18_ACLK] [get_bd_pins axi_interconnect/M06_ACLK] [get_bd_pins axi_mem_intercon/ACLK] [get_bd_pins axi_mem_intercon/M00_ACLK] [get_bd_pins axi_mem_intercon/S00_ACLK] [get_bd_pins axi_mem_intercon_1/ACLK] [get_bd_pins axi_mem_intercon_1/M00_ACLK] [get_bd_pins axi_mem_intercon_1/S00_ACLK] [get_bd_pins mipi/video_aclk] [get_bd_pins proc_sys_reset_1/slowest_sync_clk] [get_bd_pins ps_e_0/pl_clk1] [get_bd_pins ps_e_0/saxihp0_fpd_aclk] [get_bd_pins ps_e_0/saxihp1_fpd_aclk] [get_bd_pins ps_e_0/saxihp2_fpd_aclk] [get_bd_pins ps_e_0_axi_periph/M06_ACLK] [get_bd_pins shutdown_HP0_FPD/clk] [get_bd_pins shutdown_HP1_FPD/clk] [get_bd_pins shutdown_HP2_FPD/clk] [get_bd_pins video/aclk]
   connect_bd_net -net net_zynq_us_ss_0_dcm_locked [get_bd_pins axi_interconnect/M07_ARESETN] [get_bd_pins axi_interconnect/M08_ARESETN] [get_bd_pins axi_interconnect/M09_ARESETN] [get_bd_pins axi_interconnect/M10_ARESETN] [get_bd_pins axi_interconnect/M16_ARESETN] [get_bd_pins axi_interconnect/M18_ARESETN] [get_bd_pins axi_interconnect/M06_ARESETN] [get_bd_pins axi_mem_intercon/M00_ARESETN] [get_bd_pins axi_mem_intercon/S00_ARESETN] [get_bd_pins axi_mem_intercon_1/M00_ARESETN] [get_bd_pins axi_mem_intercon_1/S00_ARESETN] [get_bd_pins mipi/video_aresetn] [get_bd_pins proc_sys_reset_1/peripheral_aresetn] [get_bd_pins ps_e_0_axi_periph/M06_ARESETN] [get_bd_pins shutdown_HP0_FPD/resetn] [get_bd_pins shutdown_HP1_FPD/resetn] [get_bd_pins shutdown_HP2_FPD/resetn] [get_bd_pins video/aresetn]
-  connect_bd_net -net net_zynq_us_ss_0_peripheral_aresetn [get_bd_pins HDMI_CTL_axi_iic/s_axi_aresetn] [get_bd_pins audio_codec_ctrl_0/s_axi_aresetn] [get_bd_pins axi_intc_0/s_axi_aresetn] [get_bd_pins axi_interconnect/M00_ARESETN] [get_bd_pins axi_interconnect/M01_ARESETN] [get_bd_pins axi_interconnect/M02_ARESETN] [get_bd_pins axi_interconnect/M03_ARESETN] [get_bd_pins axi_interconnect/M04_ARESETN] [get_bd_pins axi_interconnect/M05_ARESETN] [get_bd_pins axi_interconnect/M11_ARESETN] [get_bd_pins axi_interconnect/M12_ARESETN] [get_bd_pins axi_interconnect/M13_ARESETN] [get_bd_pins axi_interconnect/M14_ARESETN] [get_bd_pins axi_interconnect/M15_ARESETN] [get_bd_pins axi_interconnect/M17_ARESETN] [get_bd_pins axi_interconnect/M19_ARESETN] [get_bd_pins axi_interconnect/M20_ARESETN] [get_bd_pins axi_interconnect/M21_ARESETN] [get_bd_pins axi_interconnect/M22_ARESETN] [get_bd_pins axi_interconnect/M23_ARESETN] [get_bd_pins axi_interconnect/M24_ARESETN] [get_bd_pins axi_interconnect/M25_ARESETN] [get_bd_pins axi_interconnect/S00_ARESETN] [get_bd_pins axi_interconnect_0/M00_ARESETN] [get_bd_pins clk_wiz_10MHz/resetn] [get_bd_pins gpio_btns/s_axi_aresetn] [get_bd_pins gpio_leds/s_axi_aresetn] [get_bd_pins gpio_sws/s_axi_aresetn] [get_bd_pins iop_grove/s_axi_aresetn] [get_bd_pins iop_pmod0/s_axi_aresetn] [get_bd_pins iop_pmod1/s_axi_aresetn] [get_bd_pins iop_rpi/s_axi_aresetn] [get_bd_pins mipi/lite_aresetn] [get_bd_pins proc_sys_reset_0/peripheral_aresetn] [get_bd_pins rgbleds/s_axi_aresetn] [get_bd_pins system_management_wiz_0/s_axi_aresetn] [get_bd_pins hdmi_tx_control/s_axi_aresetn] [get_bd_pins video/s_axi_cpu_aresetn]
-  connect_bd_net -net net_zynq_us_ss_0_s_axi_aclk [get_bd_pins HDMI_CTL_axi_iic/s_axi_aclk] [get_bd_pins address_remap_0/m_axi_out_aclk] [get_bd_pins address_remap_0/s_axi_in_aclk] [get_bd_pins audio_codec_ctrl_0/s_axi_aclk] [get_bd_pins axi_intc_0/s_axi_aclk] [get_bd_pins axi_interconnect/ACLK] [get_bd_pins axi_interconnect/M00_ACLK] [get_bd_pins axi_interconnect/M01_ACLK] [get_bd_pins axi_interconnect/M02_ACLK] [get_bd_pins axi_interconnect/M03_ACLK] [get_bd_pins axi_interconnect/M04_ACLK] [get_bd_pins axi_interconnect/M05_ACLK] [get_bd_pins axi_interconnect/M11_ACLK] [get_bd_pins axi_interconnect/M12_ACLK] [get_bd_pins axi_interconnect/M13_ACLK] [get_bd_pins axi_interconnect/M14_ACLK] [get_bd_pins axi_interconnect/M15_ACLK] [get_bd_pins axi_interconnect/M17_ACLK] [get_bd_pins axi_interconnect/M19_ACLK] [get_bd_pins axi_interconnect/M20_ACLK] [get_bd_pins axi_interconnect/M21_ACLK] [get_bd_pins axi_interconnect/M22_ACLK] [get_bd_pins axi_interconnect/M23_ACLK] [get_bd_pins axi_interconnect/M24_ACLK] [get_bd_pins axi_interconnect/M25_ACLK] [get_bd_pins axi_interconnect/S00_ACLK] [get_bd_pins axi_interconnect_0/ACLK] [get_bd_pins axi_interconnect_0/M00_ACLK] [get_bd_pins axi_interconnect_0/S00_ACLK] [get_bd_pins axi_interconnect_0/S01_ACLK] [get_bd_pins axi_interconnect_0/S02_ACLK] [get_bd_pins axi_interconnect_0/S03_ACLK] [get_bd_pins axi_register_slice_0/aclk] [get_bd_pins clk_wiz_0/clk_in1] [get_bd_pins clk_wiz_10MHz/clk_in1] [get_bd_pins gpio_btns/s_axi_aclk] [get_bd_pins gpio_leds/s_axi_aclk] [get_bd_pins gpio_sws/s_axi_aclk] [get_bd_pins iop_grove/clk_100M] [get_bd_pins iop_pmod0/clk_100M] [get_bd_pins iop_pmod1/clk_100M] [get_bd_pins iop_rpi/clk_100M] [get_bd_pins mipi/lite_aclk] [get_bd_pins proc_sys_reset_0/slowest_sync_clk] [get_bd_pins ps_e_0/maxihpm0_lpd_aclk] [get_bd_pins ps_e_0/pl_clk0] [get_bd_pins ps_e_0/saxi_lpd_aclk] [get_bd_pins rgbleds/s_axi_aclk] [get_bd_pins shutdown_LPD/clk] [get_bd_pins system_management_wiz_0/s_axi_aclk] [get_bd_pins hdmi_tx_control/s_axi_aclk] [get_bd_pins video/s_axi_cpu_aclk]
+  connect_bd_net -net net_zynq_us_ss_0_peripheral_aresetn [get_bd_pins HDMI_CTL_axi_iic/s_axi_aresetn] [get_bd_pins audio_codec_ctrl_0/s_axi_aresetn] [get_bd_pins axi_intc_0/s_axi_aresetn] [get_bd_pins axi_interconnect/M00_ARESETN] [get_bd_pins axi_interconnect/M01_ARESETN] [get_bd_pins axi_interconnect/M02_ARESETN] [get_bd_pins axi_interconnect/M03_ARESETN] [get_bd_pins axi_interconnect/M04_ARESETN] [get_bd_pins axi_interconnect/M05_ARESETN] [get_bd_pins axi_interconnect/M11_ARESETN] [get_bd_pins axi_interconnect/M12_ARESETN] [get_bd_pins axi_interconnect/M13_ARESETN] [get_bd_pins axi_interconnect/M14_ARESETN] [get_bd_pins axi_interconnect/M15_ARESETN] [get_bd_pins axi_interconnect/M17_ARESETN] [get_bd_pins axi_interconnect/M19_ARESETN] [get_bd_pins axi_interconnect/M20_ARESETN] [get_bd_pins axi_interconnect/M21_ARESETN] [get_bd_pins axi_interconnect/M22_ARESETN] [get_bd_pins axi_interconnect/M23_ARESETN] [get_bd_pins axi_interconnect/M24_ARESETN] [get_bd_pins axi_interconnect/M25_ARESETN] [get_bd_pins axi_interconnect/S00_ARESETN] [get_bd_pins axi_interconnect_0/M00_ARESETN] [get_bd_pins clk_wiz_10MHz/resetn] [get_bd_pins gpio_btns/s_axi_aresetn] [get_bd_pins gpio_leds/s_axi_aresetn] [get_bd_pins gpio_sws/s_axi_aresetn] [get_bd_pins iop_grove/s_axi_aresetn] [get_bd_pins iop_pmod0/s_axi_aresetn] [get_bd_pins iop_pmod1/s_axi_aresetn] [get_bd_pins iop_rpi/s_axi_aresetn] [get_bd_pins mipi/lite_aresetn] [get_bd_pins proc_sys_reset_0/peripheral_aresetn] [get_bd_pins rgb_leds/s_axi_aresetn] [get_bd_pins system_management_wiz_0/s_axi_aresetn] [get_bd_pins hdmi_tx_control/s_axi_aresetn] [get_bd_pins video/s_axi_cpu_aresetn]
+  connect_bd_net -net net_zynq_us_ss_0_s_axi_aclk [get_bd_pins HDMI_CTL_axi_iic/s_axi_aclk] [get_bd_pins address_remap_0/m_axi_out_aclk] [get_bd_pins address_remap_0/s_axi_in_aclk] [get_bd_pins audio_codec_ctrl_0/s_axi_aclk] [get_bd_pins axi_intc_0/s_axi_aclk] [get_bd_pins axi_interconnect/ACLK] [get_bd_pins axi_interconnect/M00_ACLK] [get_bd_pins axi_interconnect/M01_ACLK] [get_bd_pins axi_interconnect/M02_ACLK] [get_bd_pins axi_interconnect/M03_ACLK] [get_bd_pins axi_interconnect/M04_ACLK] [get_bd_pins axi_interconnect/M05_ACLK] [get_bd_pins axi_interconnect/M11_ACLK] [get_bd_pins axi_interconnect/M12_ACLK] [get_bd_pins axi_interconnect/M13_ACLK] [get_bd_pins axi_interconnect/M14_ACLK] [get_bd_pins axi_interconnect/M15_ACLK] [get_bd_pins axi_interconnect/M17_ACLK] [get_bd_pins axi_interconnect/M19_ACLK] [get_bd_pins axi_interconnect/M20_ACLK] [get_bd_pins axi_interconnect/M21_ACLK] [get_bd_pins axi_interconnect/M22_ACLK] [get_bd_pins axi_interconnect/M23_ACLK] [get_bd_pins axi_interconnect/M24_ACLK] [get_bd_pins axi_interconnect/M25_ACLK] [get_bd_pins axi_interconnect/S00_ACLK] [get_bd_pins axi_interconnect_0/ACLK] [get_bd_pins axi_interconnect_0/M00_ACLK] [get_bd_pins axi_interconnect_0/S00_ACLK] [get_bd_pins axi_interconnect_0/S01_ACLK] [get_bd_pins axi_interconnect_0/S02_ACLK] [get_bd_pins axi_interconnect_0/S03_ACLK] [get_bd_pins axi_register_slice_0/aclk] [get_bd_pins clk_wiz_0/clk_in1] [get_bd_pins clk_wiz_10MHz/clk_in1] [get_bd_pins gpio_btns/s_axi_aclk] [get_bd_pins gpio_leds/s_axi_aclk] [get_bd_pins gpio_sws/s_axi_aclk] [get_bd_pins iop_grove/clk_100M] [get_bd_pins iop_pmod0/clk_100M] [get_bd_pins iop_pmod1/clk_100M] [get_bd_pins iop_rpi/clk_100M] [get_bd_pins mipi/lite_aclk] [get_bd_pins proc_sys_reset_0/slowest_sync_clk] [get_bd_pins ps_e_0/maxihpm0_lpd_aclk] [get_bd_pins ps_e_0/pl_clk0] [get_bd_pins ps_e_0/saxi_lpd_aclk] [get_bd_pins rgb_leds/s_axi_aclk] [get_bd_pins shutdown_LPD/clk] [get_bd_pins system_management_wiz_0/s_axi_aclk] [get_bd_pins hdmi_tx_control/s_axi_aclk] [get_bd_pins video/s_axi_cpu_aclk]
   connect_bd_net -net pmod0_data_o [get_bd_pins iop_pmod0/data_o] [get_bd_pins pmod0_buf/IOBUF_IO_I]
   connect_bd_net -net pmod0_intr_req [get_bd_pins iop_pmod0/intr_req] [get_bd_pins xlconcat0/In5]
   connect_bd_net -net pmod0_intr_req_Dout [get_bd_pins iop_pmod0/intr_ack] [get_bd_pins mb_iop_pmod0_intr_ack/Dout]
@@ -4209,7 +4222,7 @@ proc create_root_design { parentCell } {
   assign_bd_address -offset 0x80120000 -range 0x00020000 -target_address_space [get_bd_addr_spaces ps_e_0/Data] [get_bd_addr_segs mipi/mipi_csi2_rx_subsyst/csirxss_s_axi/Reg] -force
   assign_bd_address -offset 0x80070000 -range 0x00010000 -target_address_space [get_bd_addr_spaces ps_e_0/Data] [get_bd_addr_segs video/hdmi_in/pixel_pack/s_axi_control/Reg] -force
   assign_bd_address -offset 0x80080000 -range 0x00010000 -target_address_space [get_bd_addr_spaces ps_e_0/Data] [get_bd_addr_segs video/hdmi_out/pixel_unpack/s_axi_control/Reg] -force
-  assign_bd_address -offset 0x80012000 -range 0x00001000 -target_address_space [get_bd_addr_spaces ps_e_0/Data] [get_bd_addr_segs rgbleds/S_AXI/Reg] -force
+  assign_bd_address -offset 0x80012000 -range 0x00001000 -target_address_space [get_bd_addr_spaces ps_e_0/Data] [get_bd_addr_segs rgb_leds/S_AXI/Reg] -force
   assign_bd_address -offset 0x80090000 -range 0x00010000 -target_address_space [get_bd_addr_spaces ps_e_0/Data] [get_bd_addr_segs shutdown_HP0_FPD/S_AXI_CTRL/Reg] -force
   assign_bd_address -offset 0x80110000 -range 0x00010000 -target_address_space [get_bd_addr_spaces ps_e_0/Data] [get_bd_addr_segs shutdown_HP1_FPD/S_AXI_CTRL/Reg] -force
   assign_bd_address -offset 0x800D0000 -range 0x00010000 -target_address_space [get_bd_addr_spaces ps_e_0/Data] [get_bd_addr_segs shutdown_HP2_FPD/S_AXI_CTRL/Reg] -force
@@ -4286,11 +4299,19 @@ proc create_root_design { parentCell } {
   # Restore current instance
   current_bd_instance $oldCurInst
 
+  # Disable MicroBlaze classic conversion to MicroBlaze-V
+  set_property CONFIG.C_ENABLE_CONVERSION {0} [get_bd_cells iop_pmod1/mb]
+  set_property CONFIG.C_ENABLE_CONVERSION {0} [get_bd_cells iop_rpi/mb]
+  set_property CONFIG.C_ENABLE_CONVERSION {0} [get_bd_cells iop_grove/mb]
+  set_property CONFIG.C_ENABLE_CONVERSION {0} [get_bd_cells iop_pmod0/mb]
+
   # Create PFM attributes
-  set_property PFM_NAME {xilinx.com:xd:${overlay_name}:1.0} [get_files [current_bd_design].bd]
+  global overlay_name
+  set pfm_name "xilinx.com:xd:${overlay_name}:1.0"
+  set_property PFM_NAME ${pfm_name} [get_files [current_bd_design].bd]
   set_property PFM.CLOCK {  pl_clk0 {id "0" is_default "true"  proc_sys_reset "proc_sys_reset_0" status "fixed"}  pl_clk1 {id "1" is_default "false"  proc_sys_reset "proc_sys_reset_1" status "fixed"}  pl_clk2 {id "2" is_default "false"  proc_sys_reset "proc_sys_reset_2" status "fixed"}  pl_clk3 {id "3" is_default "false"  proc_sys_reset "proc_sys_reset_3" status "fixed"}  } [get_bd_cells /ps_e_0]
-  set_property PFM.AXI_PORT {  M_AXI_HPM0_FPD {memport "M_AXI_GP"}  M_AXI_HPM0_LPD {memport "M_AXI_GP"}  S_AXI_HPC0_FPD {memport "S_AXI_HPC"}  S_AXI_HPC1_FPD {memport "S_AXI_HPC"}  S_AXI_HP0_FPD {memport "S_AXI_HP"}  S_AXI_HP1_FPD {memport "S_AXI_HP"}  S_AXI_HP2_FPD {memport "S_AXI_HP"}  S_AXI_HP3_FPD {memport "S_AXI_HP"}  
-    S_AXI_LPD {memport "S_AXI_HP"}  } [get_bd_cells /ps_e_0]
+  #set_property PFM.AXI_PORT {  M_AXI_HPM0_FPD {memport "M_AXI_GP"}  M_AXI_HPM0_LPD {memport "M_AXI_GP"}  S_AXI_HPC0_FPD {memport "S_AXI_HPC"}  S_AXI_HPC1_FPD {memport "S_AXI_HPC"}  S_AXI_HP0_FPD {memport "S_AXI_HP"}  S_AXI_HP1_FPD {memport "S_AXI_HP"}  S_AXI_HP2_FPD {memport "S_AXI_HP"}  S_AXI_HP3_FPD {memport "S_AXI_HP"}  S_AXI_LPD {memport "S_AXI_HP"}  } [get_bd_cells /ps_e_0]
+  set_property PFM.AXI_PORT {M_AXI_HPM1_FPD {memport "M_AXI_GP" sptag "" memory "" is_range "false"} S_AXI_HPC0_FPD {memport "S_AXI_HPC" sptag "" memory "" is_range "false"} S_AXI_HPC1_FPD {memport "S_AXI_HPC" sptag "" memory "" is_range "false"}} [get_bd_cells /ps_e_0]
   set_property PFM.IRQ {In1 {} In2 {} In3 {} In4 {} In5 {} In6 {} In7 {}} [get_bd_cells /xlconcat_0]
 
 
