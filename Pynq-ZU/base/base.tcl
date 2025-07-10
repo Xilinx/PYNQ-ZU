@@ -1870,7 +1870,7 @@ proc create_hier_cell_mipi { parentCell nameHier } {
   create_bd_pin -dir I -type rst video_aresetn
 
   # Create instance: smartconnect_0, and set properties
-  set smartconnect_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:smartconnect:1.0 mipi/smartconnect_0 ]
+  set smartconnect_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:smartconnect:1.0 smartconnect_0 ]
   set_property -dict [ list \
    CONFIG.NUM_MI {6} \
    CONFIG.NUM_SI {1} \
