@@ -55,7 +55,7 @@ class BaseOverlay(pynq.Overlay):
             self.RPI = self.iop_rpi.mb_info
 
             self.audio = self.audio_codec_ctrl_0
-            #self.audio.configure(iic_index=5)
+            self.audio.configure(iic_index=5)
 
             self.leds = self.gpio_leds.channel1
             self.leds.setdirection('out')
