@@ -1,4 +1,5 @@
 # Copyright (C) 2022 Xilinx, Inc
+# Copyright (c) 2022-2025, Advanced Micro Devices, Inc.
 
 # SPDX-License-Identifier: BSD-3-Clause
 
@@ -23,11 +24,11 @@ gitsubmodule:
 	git submodule init && git submodule update
 
 ${PREBUILT_IMAGE}:
-	wget https://bit.ly/pynq_aarch64_v3 -O $@
+	wget https://download.amd.com/opendownload/pynq/jammy.aarch64.3.1.0.tar.gz -O $@
 	@echo "Got $@"
 
 ${PREBUILT_SDIST}:
-	wget https://github.com/Xilinx/PYNQ/releases/download/v3.0.0/pynq-3.0.0.tar.gz -O $@
+	wget https://download.amd.com/opendownload/pynq/pynq-3.1.tar.gz -O $@
 	@echo "Got $@"
 
 cleanbuild:
