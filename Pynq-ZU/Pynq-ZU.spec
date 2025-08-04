@@ -10,4 +10,4 @@ STAGE4_PACKAGES_Pynq-ZU := pynq usbgadget usb-eth0 boot_leds
 STAGE4_PACKAGES_Pynq-ZU += vbus-det python_pmbus sensorconf
 STAGE4_PACKAGES_Pynq-ZU += xrt pynq_peripherals pynq_selftest
 STAGE4_PACKAGES_Pynq-ZU += wilc3000
-STAGE4_PACKAGES_Pynq-ZU += pynqmb_grove
+#STAGE4_PACKAGES_Pynq-ZU += pynqmb_grove
