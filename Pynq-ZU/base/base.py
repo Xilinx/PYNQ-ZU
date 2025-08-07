@@ -84,6 +84,10 @@ class BaseOverlay(pynq.Overlay):
         if os.path.exists(grove_dir):
             pynq.lib.pynqmicroblaze.bsp.add_module_path(grove_dir)
 
+        grove_dir = '/pynq/lib/gc/bsp_iop_grove'
+        if os.path.exists(grove_dir):
+            pynq.lib.pynqmicroblaze.bsp.add_bsp(grove_dir)
+
     def download(self):
         super().download()
         self._check_syzygy_vio()
