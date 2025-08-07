@@ -10,6 +10,6 @@ target=$1
 script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 cd $script_dir
-./build.sh
+./build.sh $target
 
 sudo cp -r $script_dir/pynq $target/home/xilinx/pynq_patch
