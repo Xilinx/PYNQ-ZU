@@ -1,14 +1,18 @@
 #!/bin/bash
 
 # Copyright (C) 2022 Xilinx, Inc
+# Copyright (c) 2022-2025, Advanced Micro Devices, Inc.
 # SPDX-License-Identifier: BSD-3-Clause
 
+set -x
 set -e
 
+target=$1
 script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 pynq_path="../../../pynq/"
 common_path="standalone_domain/bsp"
+python_ver="python3.10"
 
 # build IO Processor (IOP) binaries
 cd $script_dir/$pynq_path/boards/sw_repo
@@ -30,3 +34,10 @@ cp -rf bsp_iop_rpi_mb/iop_rpi_mb/$common_path \
 
 cd $script_dir/$pynq_path/boards/sw_repo
 make clean
+
+
+# We need to copy gc.h to PYNQ grove adapters directory
+headers_dir="pynq/lib/pynqmicroblaze/modules/grove_adapters/include"
+
+sudo cp $script_dir/$headers_dir/* \
+    $target/usr/local/share/pynq-venv/lib/$python_ver/site-packages/$headers_dir/
