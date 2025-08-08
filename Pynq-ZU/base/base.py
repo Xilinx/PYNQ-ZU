@@ -80,13 +80,6 @@ class BaseOverlay(pynq.Overlay):
             self.trace_pmod1 = TraceAnalyzer(
                 self.trace_analyzer_pmod1.description['ip'],
                 PYNQZU_PMODB_SPECIFICATION)
-        grove_dir = '/pynq/lib/pynqmicroblaze/grove_modules'
-        if os.path.exists(grove_dir):
-            pynq.lib.pynqmicroblaze.bsp.add_module_path(grove_dir)
-
-        bsp_dir = '/pynq/lib/gc/bsp_iop_grove'
-        if os.path.exists(bsp_dir):
-            pynq.lib.pynqmicroblaze.bsp.add_bsp(bsp_dir)
 
     def download(self):
         super().download()
