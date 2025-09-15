@@ -81,16 +81,16 @@ class BaseOverlay(pynq.Overlay):
                 self.trace_analyzer_pmod1.description['ip'],
                 PYNQZU_PMODB_SPECIFICATION)
 
-    def load_grove_bsp():
-        """Load Microblaze Grove BSP to be used without pynq peripherals"""
+        # Set grove to True if you would like to use the Microblaze Grove without pynq peripherals
+        grove = False
+        if grove:
+            grove_dir = '/pynq/lib/pynqmicroblaze/grove_modules'
+            if os.path.exists(grove_dir):
+                pynq.lib.pynqmicroblaze.bsp.add_module_path(grove_dir)
 
-        grove_dir = '/pynq/lib/pynqmicroblaze/grove_modules'
-        if os.path.exists(grove_dir):
-            pynq.lib.pynqmicroblaze.bsp.add_module_path(grove_dir)
-
-        bsp_dir = '/pynq/lib/gc/bsp_iop_grove'
-        if os.path.exists(bsp_dir):
-            pynq.lib.pynqmicroblaze.bsp.add_bsp(bsp_dir)
+            bsp_dir = '/pynq/lib/gc/bsp_iop_grove'
+            if os.path.exists(bsp_dir):
+                pynq.lib.pynqmicroblaze.bsp.add_bsp(bsp_dir)
 
     def download(self):
         super().download()
