@@ -10,6 +10,8 @@
 * At least 8GB of RAM (more is better)
 * AMD PetaLinux 2024.1 and Vivado 2024.1
 
+You can find the instructions to setup the environment here https://pynq.readthedocs.io/en/latest/pynq_sd_card.html#prepare-the-building-environment
+
 Retrieve the Pynq-ZU board git into a NEW directory.
 
 ```shell
@@ -36,7 +38,7 @@ In the root directory (`<LOCAL_PYNQ-ZU_REPO>/`) run `make`.
 make 2>&1 | tee build.log
 ```
 
-Once the build has completed, if successful a SD card image will be available under the directory `<LOCAL_PYNQ-ZU_REPO>/sdbuild/output/Pynq-ZU-3.1.0.img`.
+Once the build has completed, if successful a SD card image will be available under the directory `<LOCAL_PYNQ-ZU_REPO>/sdbuild/output/Pynq-ZU-3.1.1.img`.
 
 Use Etcher or Win32DiskImager to write this image to an SD card.
 
