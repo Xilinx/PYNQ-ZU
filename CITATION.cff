@@ -6,6 +6,6 @@ title: "PYNQ-ZU"
 type: software
 license: 'BSD-3-Clause'
 version: 3.1.1
-date-released: "2025-09-24"
+date-released: "2025-09-25"
 url: 'https://pynq.io'
 repository-code: "https://github.com/Xilinx/PYNQ-ZU"
