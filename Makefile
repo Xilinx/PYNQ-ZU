@@ -28,7 +28,7 @@ ${PREBUILT_IMAGE}:
 	@echo "Got $@"
 
 ${PREBUILT_SDIST}:
-	wget https://download.amd.com/opendownload/pynq/pynq-3.1.tar.gz -O $@
+	wget https://download.amd.com/opendownload/pynq/pynq-3.1.2.tar.gz -O $@
 	@echo "Got $@"
 
 cleanbuild:
